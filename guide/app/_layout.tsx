@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
+import { AccessGate } from "@/components/AccessGate";
 import { colors } from "@/constants/Theme";
 
 export { ErrorBoundary } from "expo-router";
@@ -33,7 +34,7 @@ export default function RootLayout() {
   if (!loaded) return null;
 
   return (
-    <>
+    <AccessGate>
       <StatusBar style="dark" />
       <Stack
         screenOptions={{
@@ -47,6 +48,6 @@ export default function RootLayout() {
         <Stack.Screen name="event/[id]" options={{ title: "Event" }} />
         <Stack.Screen name="car/[id]" options={{ title: "Car" }} />
       </Stack>
-    </>
+    </AccessGate>
   );
 }

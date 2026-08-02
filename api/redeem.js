@@ -177,6 +177,23 @@ module.exports = async function handler(req, res) {
     JSON.stringify({ e: email, c: code, t: Date.now() })
   ).toString("base64url");
 
+  const accessSecret = process.env.ACCESS_COOKIE_SECRET || "";
+  if (accessSecret) {
+    // HttpOnly session cookie — required by middleware for /guide
+    const maxAge = 60 * 60 * 24 * 30; // 30 days
+    const parts = [
+      `pbcrun_access=${encodeURIComponent(accessSecret)}`,
+      "Path=/",
+      `Max-Age=${maxAge}`,
+      "SameSite=Lax",
+      "HttpOnly",
+    ];
+    if (process.env.NODE_ENV === "production" || process.env.VERCEL) {
+      parts.push("Secure");
+    }
+    res.setHeader("Set-Cookie", parts.join("; "));
+  }
+
   return json(res, 200, {
     ok: true,
     message: "Welcome",

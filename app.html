@@ -3,21 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="refresh" content="0;url=/guide" />
-  <title>PBCRun — Opening guide…</title>
+  <title>PBCRun</title>
   <script>
-    try {
-      if (!localStorage.getItem("pbcrun_access")) {
-        window.location.replace("/?need_code=1");
-      } else {
-        window.location.replace("/guide");
-      }
-    } catch (e) {
-      window.location.replace("/guide");
-    }
+    // Always go through the wall; middleware also enforces /guide
+    window.location.replace("/?need_code=1");
   </script>
 </head>
 <body>
-  <p><a href="/guide">Continue to guide</a></p>
+  <p><a href="/?need_code=1">Enter with invitation code</a></p>
 </body>
 </html>
