@@ -76,8 +76,63 @@
       <p class="sr-only" id="countdown-sr" aria-live="polite"></p>
     </div>
 
-    <section class="card" id="card" aria-labelledby="request-title">
-      <div class="form-fields">
+    <section class="card" id="card" aria-labelledby="enter-title">
+      <div class="form-fields" id="enter-fields">
+        <h2 class="card-title" id="enter-title" data-i18n="enter_title">Enter</h2>
+        <form id="enter-form" action="/api/redeem" method="POST" novalidate>
+          <div class="hp" aria-hidden="true">
+            <label for="website-enter">Website</label>
+            <input id="website-enter" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="enter-email" data-i18n="email">Email</label>
+            <input
+              id="enter-email"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+              inputmode="email"
+              enterkeyhint="next"
+              data-i18n-placeholder="email_ph"
+              placeholder="you@domain.com"
+              aria-required="true"
+              aria-describedby="enter-hint enter-status"
+            />
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="invite-code" data-i18n="code_label">Enter invitation code</label>
+            <input
+              id="invite-code"
+              name="code"
+              type="text"
+              required
+              autocomplete="one-time-code"
+              enterkeyhint="go"
+              autocapitalize="characters"
+              spellcheck="false"
+              data-i18n-placeholder="code_ph"
+              placeholder="Your code"
+              aria-required="true"
+              aria-describedby="enter-hint enter-status"
+            />
+          </div>
+
+          <button type="submit" id="enter-btn" data-i18n="enter_cta">Enter</button>
+          <p class="hint" id="enter-hint" data-i18n="enter_hint">Use the email and code from your invitation.</p>
+          <p class="status" id="enter-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="toggle-wrap">
+          <button type="button" class="text-btn" id="show-request" data-i18n="need_invite">
+            Don’t have a code? Request an invitation
+          </button>
+        </p>
+      </div>
+
+      <div class="form-fields is-hidden" id="request-fields" hidden>
         <h2 class="card-title" id="request-title" data-i18n="request_title">Request Invitation</h2>
         <form id="invite-form" action="/api/subscribe" method="POST" novalidate>
           <div class="hp" aria-hidden="true">
@@ -110,25 +165,6 @@
             <input id="name" name="name" type="text" autocomplete="name" enterkeyhint="next" data-i18n-placeholder="name_ph" placeholder="Your name" />
           </div>
 
-          <div class="field">
-            <label class="field-label" for="attending" data-i18n="attending">At Car Week 2026?</label>
-            <select id="attending" name="attending">
-              <option value="" data-i18n="select">Select…</option>
-              <option value="yes" data-i18n="attending_yes">Yes — I’ll be there</option>
-              <option value="maybe" data-i18n="attending_maybe">Maybe</option>
-              <option value="no" data-i18n="attending_no">Following from afar</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label class="field-label" for="platform" data-i18n="platform">Interested in</label>
-            <select id="platform" name="platform">
-              <option value="both" data-i18n="platform_both">iPhone app &amp; web</option>
-              <option value="ios" data-i18n="platform_ios">iPhone app</option>
-              <option value="web" data-i18n="platform_web">Web guide</option>
-            </select>
-          </div>
-
           <div class="consent-row">
             <input id="consent" name="consent" type="checkbox" value="true" required aria-required="true" />
             <label for="consent">
@@ -141,11 +177,22 @@
           <p class="hint" id="form-hint" data-i18n="hint">Join the list for early access before Car Week</p>
           <p class="status" id="form-status" role="status" aria-live="polite"></p>
         </form>
+
+        <p class="toggle-wrap">
+          <button type="button" class="text-btn" id="show-enter" data-i18n="have_code">
+            Already have a code? Enter here
+          </button>
+        </p>
       </div>
 
-      <div class="success" id="success-block" role="status" aria-live="polite">
+      <div class="success is-hidden" id="success-block" role="status" aria-live="polite" hidden>
         <h2 data-i18n="success_title">You’re on the list</h2>
         <p data-i18n="success_body">Thanks — we’ll email your invitation when access opens.</p>
+        <p class="toggle-wrap">
+          <button type="button" class="text-btn" id="success-back" data-i18n="have_code">
+            Already have a code? Enter here
+          </button>
+        </p>
       </div>
     </section>
   </main>

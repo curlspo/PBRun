@@ -482,8 +482,44 @@ html[lang="ar"] .card button[type="submit"] {
   color: var(--ok);
 }
 
-.card.is-success .form-fields {
-  display: none;
+.card.is-success #enter-fields,
+.card.is-success #request-fields {
+  display: none !important;
+}
+
+.is-hidden,
+[hidden] {
+  display: none !important;
+}
+
+.toggle-wrap {
+  margin: 1.1rem 0 0;
+  text-align: center;
+}
+
+.text-btn {
+  appearance: none;
+  border: 0;
+  background: none;
+  color: var(--gold);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  min-height: var(--touch);
+  padding: 0.35rem 0.25rem;
+}
+
+.text-btn:hover {
+  color: var(--ink);
+}
+
+#invite-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .success {
