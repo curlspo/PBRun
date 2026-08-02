@@ -1,0 +1,310 @@
+
+
+===== PAGE 1 =====
+
+PBCRun is an independent, unofficial guide. Not affiliated with, endorsed by, or
+sponsored by the Pebble Beach Concours d'Elegance, Pebble Beach Company, or any
+official Car Week organizer.
+MOBILE APPLICATION — CONFIRMED MVP PLAN
+PBCRun
+A visitor's guide to every event of Car Week — official and satellite, free
+and ticketed — with the competing cars laid out by show, and a simple
+personal log of what you've been to.
+01 — CALENDAR
+Every event, with descriptions
+02 — CAR LISTS
+Directory + spotted feed
+03 — PROFILE
+Personal check-in log
+01 / Overview
+!ree features, con"rmed — nothing extra
+No auxiliary-event organizing, no messaging, no social layer. This is a guide app
+for someone flying in for Car Week who wants to know what's on, what's
+OVERVIEWSITEMAPWIREFRAMESUSER FLOWSFEATURESTIMELINE
+
+===== PAGE 2 =====
+
+competing, and to keep their own record of the week.
+CALENDAR
+Every event, Aug 7–16
+Free / ticketed tag on each
+Full description per event
+Add to device calendar
+CAR DIRECTORY
+Programmed shows only
+Class-filterable
+Basics for every car
+Description where one exists
+SPOTTED
+Wildcard shows (Lemons, etc.)
+Live, user-posted
+No pre-built roster
+Photo + short caption
+PROFILE
+Check in at any event
+Personal log, private
+No messaging
+No public social feed
+02 / Information Architecture
+Sitemap
+Four tabs. "Cars" is one tab with two internal modes — Directory and Spotted —
+since they're the same object (a car) shown two different ways depending on
+whether the show publishes an entrant list.
+PBCRUN — ROOT TAB BAR
+HOME
+Today at a glance
+CALENDAR
+Day tabs, Aug 7–16
+
+===== PAGE 3 =====
+
+Next event countdown
+Featured car of the day
+Disclaimer strip
+Event detail page
+Free/ticketed filter
+Save / add to calendar
+CARS
+Mode: Directory (programmed)
+Mode: Spotted (wildcard)
+Car detail page
+Class / show filter
+PROFILE
+Check-in button (per event)
+Personal attendance log
+Saved events
+Settings
+03 / Wireframes
+Key screens
+Seven screens, including both Car modes shown side by side so the difference
+is visible at a glance.
+Home
+ENTRY POINT
+Calendar
+DAY-TAB SCHEDULE
+THU AUG 13 · DAY 7 OF 10THU AUG 13 · DAY 7 OF 10THU AUG 13 · DAY 7 OF 10THU AUG 13 · DAY 7 OF 10
+PBCRun
+Unofficial guide · not affiliated with the Concours
+Next: Tour d'Elegance
+Starts 9:00am · Free to watch roadside
+ Calendar
+14 events today
+ Cars
+Directory + Spotted
+Featured: 1937 Delahaye 135M
+Competing at Sunday's Concours
+10 DAYS · AUG 7–1610 DAYS · AUG 7–1610 DAYS · AUG 7–1610 DAYS · AUG 7–16
+Calendar
+7
+1013
+14
+15
+16
+Pebble Beach Tour d'Elegance
+FREE Roadside · 9:00am
+Concours Village opens
+FREE Pebble Beach · all day
+RM Sotheby's Auction begins
+TICKETED Monterey Conf. Center
+
+===== PAGE 4 =====
+
+Event Detail
+FULL DESCRIPTION
+Cars — Directory
+PROGRAMMED SHOWS
+Car Detail
+SINGLE ENTRY, EITHER MODE
+Cars — Spotted
+WILDCARD SHOWS, LIVE
+TICKETED Monterey Conf. Center
+FREEFREEFREEFREE
+THU AUG 13, 9:00AMTHU AUG 13, 9:00AMTHU AUG 13, 9:00AMTHU AUG 13, 9:00AM
+Tour d'Elegance
+What it is
+Concours entrants drive a scenic public route — the only
+time you see them in motion.
+Where to watch
+Ocean Ave, Carmel · Sunset Dr, Pacific Grove
+ὑ Save
+ ✓✓✓✓ Check In
+MODE: DIRECTORYMODE: DIRECTORYMODE: DIRECTORYMODE: DIRECTORY
+Pebble Beach Concours
+All Classes
+Pre-War
+Ferrari
+1937 Delahaye 135M
+Class F · Owner: R. Whitfield
+1961 Ferrari 250 GT SWB
+Class C · Featured marque entry
+1929 Duesenberg Model J
+Class F · No description on file
+CLASS F · PRE-WARCLASS F · PRE-WARCLASS F · PRE-WARCLASS F · PRE-WAR
+1937 Delahaye 135M
+Basics
+Owner: R. Whitfield · Coachwork: Figoni et Falaschi
+MODE: SPOTTED · LIVEMODE: SPOTTED · LIVEMODE: SPOTTED · LIVEMODE: SPOTTED · LIVE
+Concours d'Lemons
+
+
+===== PAGE 5 =====
+
+Profile
+PERSONAL CHECK-IN LOG
+Description
+Shown only when one is on file for this car — otherwise
+this section is simply omitted.
+"Barely Runs" — 1986 Yugo
+Posted 12 min ago · Seaside City Hall
+Rust-perforated Volvo wagon
+Posted 25 min ago
++ Post a car you see
+PRIVATE · VISIBLE ONLY TO YOUPRIVATE · VISIBLE ONLY TO YOUPRIVATE · VISIBLE ONLY TO YOUPRIVATE · VISIBLE ONLY TO YOU
+My Car Week
+Tour d'Elegance — checked in 9:14am
+Concours Village — checked in
+11:02am
+Legends of the Autobahn — checked in
+2:30pm
+3 Saved Upcoming Events
+
+===== PAGE 6 =====
+
+04 / User Flows
+How a visitor moves through it
+BEFORE ARRIVALPLANNING THE WEEK
+AT A PROGRAMMED SHOWCONCOURS, QUAIL, CONCORSO ITALIANO
+AT A WILDCARD SHOWCONCOURS D'LEMONS, STREET SHOWS
+05 / Feature Set
+MVP vs. Phase 2
+MVP — LAUNCH SETMVP — LAUNCH SETMVP — LAUNCH SETMVP — LAUNCH SET
+01
+Download app,
+browse full Calendarˠ
+02
+Filter by Free to build
+a low-cost day ˠ
+03
+Save events of interestˠ
+04
+Browse Car Directory
+for Sunday's Concours
+field
+01
+Open Calendar, tap
+today's event ˠ
+02
+Check in on arrivalˠ
+03
+Switch to Cars ˠ
+Directory, filter by
+class
+ˠ
+04
+Open a car's detail
+page while standing in
+front of it
+01
+Open Cars ˠ
+Spotted, switches
+automatically for this
+event
+ˠ
+02
+Browse what others
+have posted so far
+today
+ˠ
+03
+Post a car they find
+funny or interestingˠ
+04
+Check in to log the
+event
+
+===== PAGE 7 =====
+
+MVP — LAUNCH SETMVP — LAUNCH SETMVP — LAUNCH SETMVP — LAUNCH SET
+Full Calendar Every Car Week event, Aug 7–16, official and satellite, with
+descriptions
+Free/Ticketed TagsClear label on every event so cost is never a surprise
+Save + Device CalendarBookmark events, export to phone calendar
+Car Directory Programmed-show entrants, class-filterable, basics + description
+where one exists
+Spotted Feed Live, user-posted cars for wildcard shows with no pre-built roster
+Check-In One tap per event, private to the user
+Personal Log Chronological record of everything checked into that week
+Non-A!liation NoticesOnboarding, guide screens, app store listing
+PHASE 2 — EXPLICITLY DEFERREDPHASE 2 — EXPLICITLY DEFERREDPHASE 2 — EXPLICITLY DEFERREDPHASE 2 — EXPLICITLY DEFERRED
+Messaging Deliberately cut from MVP — revisit only if there's real demand
+Public Social FeedSpotted stays functional, not social, for now
+Push Noti"cations "Starting soon" alerts for saved events
+Photo Galleries Multiple photos per car, not just one
+Multi-Year ArchivePast years' entrant directories and Best of Show history
+O#ine Mode Cached calendar and directory for spotty peninsula signal
+
+===== PAGE 8 =====
+
+CUT FROM EARLIER DRAFTSCUT FROM EARLIER DRAFTSCUT FROM EARLIER DRAFTSCUT FROM EARLIER DRAFTS
+Auxiliary-event organizing tools, RSVP/ticketing for third-party meetups, in-app messaging,
+and any "official" voting or judging feature — all removed to keep this a guide, not a
+platform, and to stay clearly on the unofficial side of the line.
+06 / Launch Timeline
+14-day sprint
+Calendar data collection starts Day 1, since it's the backbone every other screen
+depends on.
+WEEKWEEKWEEKWEEK
+1111 Data & Core Build
+Day 1Day 1Day 1Day 1Compile the calendar dataset
+All events, Aug 7–16
+Free/ticketed tagged
+Draft descriptions
+Day 2Day 2Day 2Day 2Compile programmed-show entrant lists
+Concours, Quail, Concorso Italiano
+Day 3Day 3Day 3Day 3Build: Home + Calendar
+Grok prompt sprint
+Nav shell
+Day 4Day 4Day 4Day 4Build: Event Detail + Save/Device Calendar
+Day 5Day 5Day 5Day 5Build: Cars — Directory mode
+Class filters
+Day 6Day 6Day 6Day 6Build: Cars — Spotted mode
+Photo post
+Live feed
+Day 7Day 7Day 7Day 7Internal review checkpoint
+
+===== PAGE 9 =====
+
+Day 7Day 7Day 7Day 7
+Walk both Car modes
+Cut/adjust scope
+WEEKWEEKWEEKWEEK
+2222 Pro!le, Test & Launch
+Day 8Day 8Day 8Day 8Build: Check-in + Personal Log
+Day 9Day 9Day 9Day 9Disclaimer & onboarding copy pass
+Non-affiliation language everywhere it's needed
+DayDayDayDay
+10101010
+Polish pass
+Empty/error states
+Missing-description handling
+DayDayDayDay
+11111111
+QA + submit to app review
+iOS + Android
+DayDayDayDay
+12121212
+Content freeze
+Final calendar & directory lock
+DayDayDayDay
+13131313
+Field test
+Check-in and Spotted post, tested live
+DayDayDayDay
+14141414
+Public launch
+Store listing live
+Ahead of Aug 7 kickoff
+PBCRun is an independent, unofficial guide to Car Week. It is not affiliated with, endorsed
+by, or sponsored by the Pebble Beach Concours d'Elegance, Pebble Beach Company, or any
+official Car Week organizer. All event information is provided for general planning
+purposes only.

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PBCRun — Request an Invitation</title>
+  <meta name="description" content="PBCRun is an unofficial Monterey Car Week companion. Request an invitation for early access." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta property="og:title" content="PBCRun — Request an Invitation" />
+  <meta property="og:description" content="Unofficial Monterey Car Week companion. Request early access." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pbcrun.com/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0a'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='14' font-family='Georgia,serif' fill='%23c4a35a'%3EP%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #070708;
+      --bg-elevated: #121214;
+      --ink: #f4f1ea;
+      --muted: #9a958c;
+      --line: rgba(244, 241, 234, 0.12);
+      --gold: #c4a35a;
+      --gold-soft: rgba(196, 163, 90, 0.18);
+      --danger: #e8a0a0;
+      --ok: #9ec9a8;
+      --radius: 14px;
+      --max: 440px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "DM Sans", system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 50% -10%, rgba(196, 163, 90, 0.12), transparent 55%),
+        radial-gradient(800px 500px at 100% 100%, rgba(80, 100, 140, 0.08), transparent 50%),
+        var(--bg);
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrap {
+      width: min(100% - 2rem, var(--max));
+      margin: 0 auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2.5rem 0 2rem;
+    }
+
+    .mark {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.65rem;
+      margin-bottom: 2rem;
+    }
+
+    .logo {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(2.4rem, 8vw, 3.1rem);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      margin: 0;
+      line-height: 1;
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .tagline {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.35rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0.25rem 0 0;
+      line-height: 1.35;
+      max-width: 22ch;
+    }
+
+    .sub {
+      margin: 0.35rem 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      max-width: 34ch;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 40%), var(--bg-elevated);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.25rem 1.25rem;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .card h2 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      margin: 0 0 0.35rem;
+      letter-spacing: 0.02em;
+    }
+
+    .card p.lead {
+      margin: 0 0 1.15rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+      font-weight: 500;
+    }
+
+    .field {
+      margin-bottom: 0.9rem;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      appearance: none;
+      border: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.35);
+      color: var(--ink);
+      border-radius: 10px;
+      padding: 0.9rem 0.95rem;
+      font: inherit;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input[type="email"]::placeholder {
+      color: rgba(154, 149, 140, 0.7);
+    }
+
+    input[type="email"]:focus {
+      border-color: rgba(196, 163, 90, 0.65);
+      box-shadow: 0 0 0 3px var(--gold-soft);
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      padding: 0.95rem 1rem;
+      font: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: #111;
+      background: linear-gradient(180deg, #d4b76e, var(--gold));
+      transition: transform 0.12s ease, filter 0.12s ease, opacity 0.12s ease;
+    }
+
+    button[type="submit"]:hover:not(:disabled) {
+      filter: brightness(1.05);
+    }
+
+    button[type="submit"]:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+
+    button[type="submit"]:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
+    .status {
+      min-height: 1.25rem;
+      margin: 0.75rem 0 0;
+      font-size: 0.88rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .status.error { color: var(--danger); }
+    .status.ok { color: var(--ok); }
+
+    .fine {
+      margin: 1.1rem 0 0;
+      font-size: 0.75rem;
+      line-height: 1.45;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer {
+      width: min(100% - 2rem, 36rem);
+      margin: 0 auto 1.25rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.7rem;
+      line-height: 1.5;
+    }
+
+    footer a {
+      color: rgba(196, 163, 90, 0.9);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    .divider {
+      width: 2.5rem;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.55;
+      margin: 0.15rem auto 0.2rem;
+    }
+
+    /* success state */
+    .card.is-success .form-block { display: none; }
+    .success-block { display: none; text-align: center; padding: 0.5rem 0.25rem 0.25rem; }
+    .card.is-success .success-block { display: block; }
+    .success-block h2 { margin-bottom: 0.5rem; }
+    .success-block p { color: var(--muted); margin: 0; font-size: 0.95rem; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="mark">
+      <p class="eyebrow">Monterey · August 2026</p>
+      <h1 class="logo">PB<span>C</span>Run</h1>
+      <div class="divider" aria-hidden="true"></div>
+      <p class="tagline">Unofficial Monterey Car Week companion</p>
+      <p class="sub">What’s on. What’s free. What’s on the field. Your private record of the week.</p>
+    </header>
+
+    <section class="card" id="card" aria-labelledby="invite-heading">
+      <div class="form-block">
+        <h2 id="invite-heading">Request invitation</h2>
+        <p class="lead">Early access is invite-only. Leave your email and we’ll send an invitation when your place is ready.</p>
+
+        <!--
+          FormSubmit delivers to the address in the action URL.
+          First submission triggers a one-time confirmation email — check inbox/spam once.
+          Change the email below if you prefer a different inbox.
+        -->
+        <form id="invite-form" action="https://formsubmit.co/ajax/jhollidayesq@gmail.com" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="PBCRun invitation request" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+          <div class="field">
+            <label for="email">Email address</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+              inputmode="email"
+              placeholder="you@email.com"
+              aria-describedby="form-status"
+            />
+          </div>
+
+          <button type="submit" id="submit-btn">Request invitation</button>
+          <p class="status" id="form-status" role="status" aria-live="polite"></p>
+          <p class="fine">No spam. Used only for your PBCRun invitation.</p>
+        </form>
+      </div>
+
+      <div class="success-block" id="success-block">
+        <h2>You’re on the list</h2>
+        <p>Thanks — we’ll email your invitation when access opens. Follow us on Instagram for launch updates.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      PBCRun is an independent, unofficial guide to Monterey Car Week.
+      Not affiliated with, endorsed by, or sponsored by the Pebble Beach Concours d’Elegance,
+      Pebble Beach Company, or any official Car Week organizer.
+    </p>
+    <p style="margin-top:0.65rem">
+      <a href="https://instagram.com/" id="ig-link" rel="noopener noreferrer">Instagram</a>
+      ·
+      <a href="mailto:jhollidayesq@gmail.com">Contact</a>
+    </p>
+  </footer>
+
+  <script>
+    (function () {
+      var form = document.getElementById("invite-form");
+      var statusEl = document.getElementById("form-status");
+      var btn = document.getElementById("submit-btn");
+      var card = document.getElementById("card");
+
+      function setStatus(msg, kind) {
+        statusEl.textContent = msg || "";
+        statusEl.className = "status" + (kind ? " " + kind : "");
+      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var email = (form.email.value || "").trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          setStatus("Please enter a valid email address.", "error");
+          form.email.focus();
+          return;
+        }
+
+        btn.disabled = true;
+        setStatus("Sending…");
+
+        var data = new FormData(form);
+        data.set("email", email);
+        data.set("source", "pbcrun.com landing");
+        data.set("requested_at", new Date().toISOString());
+
+        fetch(form.action, {
+          method: "POST",
+          body: data,
+          headers: { Accept: "application/json" }
+        })
+          .then(function (res) {
+            return res.json().then(function (body) {
+              return { ok: res.ok, body: body };
+            });
+          })
+          .then(function (result) {
+            if (result.ok) {
+              card.classList.add("is-success");
+              setStatus("");
+              try {
+                localStorage.setItem("pbcrun_invite_requested", email);
+              } catch (_) {}
+              return;
+            }
+            var msg =
+              (result.body && (result.body.message || result.body.error)) ||
+              "Something went wrong. Please try again in a moment.";
+            setStatus(msg, "error");
+            btn.disabled = false;
+          })
+          .catch(function () {
+            setStatus("Network error. Check your connection and try again.", "error");
+            btn.disabled = false;
+          });
+      });
+
+      // If they already requested in this browser, show success
+      try {
+        if (localStorage.getItem("pbcrun_invite_requested")) {
+          card.classList.add("is-success");
+        }
+      } catch (_) {}
+    })();
+  </script>
+</body>
+</html>
