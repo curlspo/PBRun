@@ -1,13 +1,8 @@
 /**
- * POST /api/redeem
- * Exchange email + invitation code for site access.
- *
- * Body JSON:
- *   email*   string
- *   code*    string
- *   language string
- *   website  honeypot
+ * POST /api/redeem — email + invitation code → access
  */
+
+const { guardPublicPost } = require("./_lib/security");
 
 const LABEL = process.env.INVITE_LABEL || "invite-access";
 const REPO = process.env.GITHUB_REPO || "curlspo/PBRun";
@@ -16,27 +11,7 @@ function json(res, status, body) {
   res.statusCode = status;
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   res.setHeader("Cache-Control", "no-store");
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.end(JSON.stringify(body));
-}
-
-function readBody(req) {
-  return new Promise((resolve, reject) => {
-    const chunks = [];
-    req.on("data", (c) => chunks.push(c));
-    req.on("end", () => {
-      const raw = Buffer.concat(chunks).toString("utf8");
-      if (!raw) return resolve({});
-      try {
-        resolve(JSON.parse(raw));
-      } catch (e) {
-        reject(e);
-      }
-    });
-    req.on("error", reject);
-  });
 }
 
 function normalizeEmail(email) {
@@ -46,14 +21,17 @@ function normalizeEmail(email) {
 }
 
 function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return false;
+  if (email.length > 254) return false;
+  return true;
 }
 
 function normalizeCode(code) {
   return String(code || "")
     .trim()
     .toUpperCase()
-    .replace(/\s+/g, "");
+    .replace(/\s+/g, "")
+    .slice(0, 64);
 }
 
 function getValidCodes() {
@@ -62,12 +40,6 @@ function getValidCodes() {
     .split(/[,\n]/)
     .map((c) => normalizeCode(c))
     .filter(Boolean);
-}
-
-function clientIp(req) {
-  const xf = req.headers["x-forwarded-for"];
-  if (typeof xf === "string" && xf.length) return xf.split(",")[0].trim();
-  return req.headers["x-real-ip"] || "";
 }
 
 async function gh(path, options = {}) {
@@ -115,6 +87,7 @@ async function logAccess(record) {
     `| Email | ${record.email} |`,
     `| Code | ${record.code} |`,
     `| Language | ${record.language || "—"} |`,
+    `| IP | ${record.ip || "—"} |`,
     `| Created | ${record.created_at} |`,
   ].join("\n");
 
@@ -129,7 +102,6 @@ async function logAccess(record) {
       }),
     });
   } catch (err) {
-    // Label may not exist yet — retry without labels
     if (err.status === 422) {
       await gh(`/repos/${REPO}/issues`, {
         method: "POST",
@@ -146,19 +118,14 @@ async function logAccess(record) {
 }
 
 module.exports = async function handler(req, res) {
-  if (req.method === "OPTIONS") {
-    return json(res, 204, {});
-  }
-  if (req.method !== "POST") {
-    return json(res, 405, { ok: false, error: "Method not allowed" });
-  }
+  const gate = await guardPublicPost(req, res, {
+    route: "redeem",
+    limit: 10, // code guesses per IP per window
+    windowMs: 15 * 60 * 1000,
+  });
+  if (!gate.ok) return;
 
-  let input;
-  try {
-    input = await readBody(req);
-  } catch {
-    return json(res, 400, { ok: false, error: "Invalid request body" });
-  }
+  const input = gate.body || {};
 
   if (input.website || input._honey || input.company) {
     return json(res, 200, { ok: true });
@@ -183,6 +150,7 @@ module.exports = async function handler(req, res) {
     });
   }
 
+  // Constant-ish path: always check membership the same way
   if (!valid.includes(code)) {
     return json(res, 401, {
       ok: false,
@@ -195,7 +163,7 @@ module.exports = async function handler(req, res) {
     code,
     language: String(input.language || "").trim().slice(0, 16),
     user_agent: String(req.headers["user-agent"] || "").slice(0, 400),
-    ip: String(clientIp(req)).slice(0, 64),
+    ip: String(gate.ip || "").slice(0, 64),
     created_at: new Date().toISOString(),
   };
 
@@ -203,10 +171,8 @@ module.exports = async function handler(req, res) {
     await logAccess(record);
   } catch (err) {
     console.error("redeem log error", err && err.message);
-    // Still grant access if code is valid even if logging fails
   }
 
-  // Opaque client token (not a secret; gate is the code). Helps client remember access.
   const token = Buffer.from(
     JSON.stringify({ e: email, c: code, t: Date.now() })
   ).toString("base64url");

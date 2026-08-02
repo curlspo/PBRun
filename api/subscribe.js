@@ -1,21 +1,8 @@
 /**
- * POST /api/subscribe
- * Public waitlist signup. Stores a structured record (GitHub Issues labeled "waitlist").
- *
- * Body (JSON or form-urlencoded):
- *   email*          string
- *   name            string
- *   phone           string
- *   city            string
- *   attending       "yes" | "no" | "maybe" | ""
- *   platform        "ios" | "web" | "both" | ""
- *   source          string  (e.g. landing, instagram)
- *   utm_source      string
- *   utm_medium      string
- *   utm_campaign    string
- *   consent*        boolean / "true"  — must be true
- *   website         honeypot (must be empty)
+ * POST /api/subscribe — waitlist / invitation request
  */
+
+const { guardPublicPost, clientIp } = require("./_lib/security");
 
 const LABEL = process.env.WAITLIST_LABEL || "waitlist";
 const REPO = process.env.GITHUB_REPO || "curlspo/PBRun";
@@ -24,40 +11,7 @@ function json(res, status, body) {
   res.statusCode = status;
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   res.setHeader("Cache-Control", "no-store");
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.end(JSON.stringify(body));
-}
-
-function readBody(req) {
-  return new Promise((resolve, reject) => {
-    const chunks = [];
-    req.on("data", (c) => chunks.push(c));
-    req.on("end", () => {
-      const raw = Buffer.concat(chunks).toString("utf8");
-      if (!raw) return resolve({});
-      const ct = (req.headers["content-type"] || "").toLowerCase();
-      try {
-        if (ct.includes("application/json")) {
-          resolve(JSON.parse(raw));
-          return;
-        }
-        if (ct.includes("application/x-www-form-urlencoded")) {
-          const params = new URLSearchParams(raw);
-          const obj = {};
-          for (const [k, v] of params.entries()) obj[k] = v;
-          resolve(obj);
-          return;
-        }
-        // try JSON anyway
-        resolve(JSON.parse(raw));
-      } catch (e) {
-        reject(e);
-      }
-    });
-    req.on("error", reject);
-  });
 }
 
 function normalizeEmail(email) {
@@ -67,7 +21,11 @@ function normalizeEmail(email) {
 }
 
 function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  // Basic shape only — not full RFC; rejects obvious junk
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return false;
+  if (email.length > 254) return false;
+  if (email.includes("..")) return false;
+  return true;
 }
 
 function truthy(v) {
@@ -79,13 +37,7 @@ function truthy(v) {
   return false;
 }
 
-function clientIp(req) {
-  const xf = req.headers["x-forwarded-for"];
-  if (typeof xf === "string" && xf.length) return xf.split(",")[0].trim();
-  return req.headers["x-real-ip"] || "";
-}
-
-function buildRecord(input, req) {
+function buildRecord(input, req, ip) {
   const email = normalizeEmail(input.email);
   const url =
     typeof input.page_url === "string"
@@ -107,7 +59,7 @@ function buildRecord(input, req) {
     referrer: String(input.referrer || req.headers["referer"] || "").slice(0, 500),
     page_url: String(url).slice(0, 500),
     user_agent: String(req.headers["user-agent"] || "").slice(0, 400),
-    ip: String(clientIp(req)).slice(0, 64),
+    ip: String(ip || clientIp(req)).slice(0, 64),
     consent: true,
     status: "pending",
     created_at: new Date().toISOString(),
@@ -150,7 +102,6 @@ async function gh(path, options = {}) {
 }
 
 async function findExisting(email) {
-  // Prefer listing by label (immediate) over Search API (eventual consistency).
   const [owner, repo] = REPO.split("/");
   const data = await gh(
     `/repos/${owner}/${repo}/issues?labels=${encodeURIComponent(
@@ -177,13 +128,9 @@ async function createSignup(record) {
     "|-------|-------|",
     `| Email | ${record.email} |`,
     `| Name | ${record.name || "—"} |`,
-    `| Phone | ${record.phone || "—"} |`,
-    `| City | ${record.city || "—"} |`,
-    `| Attending | ${record.attending || "—"} |`,
-    `| Platform | ${record.platform || "—"} |`,
     `| Source | ${record.source || "—"} |`,
     `| Language | ${record.language || "—"} |`,
-    `| UTM | ${[record.utm_source, record.utm_medium, record.utm_campaign].filter(Boolean).join(" / ") || "—"} |`,
+    `| IP | ${record.ip || "—"} |`,
     `| Status | ${record.status} |`,
     `| Created | ${record.created_at} |`,
   ].join("\n");
@@ -200,21 +147,16 @@ async function createSignup(record) {
 }
 
 module.exports = async function handler(req, res) {
-  if (req.method === "OPTIONS") {
-    return json(res, 204, {});
-  }
-  if (req.method !== "POST") {
-    return json(res, 405, { ok: false, error: "Method not allowed" });
-  }
+  const gate = await guardPublicPost(req, res, {
+    route: "subscribe",
+    limit: 5, // 5 invitation requests per IP per window
+    windowMs: 15 * 60 * 1000,
+  });
+  if (!gate.ok) return;
 
-  let input;
-  try {
-    input = await readBody(req);
-  } catch {
-    return json(res, 400, { ok: false, error: "Invalid request body" });
-  }
+  const input = gate.body || {};
 
-  // Honeypot
+  // Honeypot — bots that fill hidden fields
   if (input.website || input._honey || input.company) {
     return json(res, 200, { ok: true, duplicate: false });
   }
@@ -230,7 +172,7 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  const record = buildRecord({ ...input, email }, req);
+  const record = buildRecord({ ...input, email }, req, gate.ip);
 
   try {
     const existing = await findExisting(email);
@@ -248,11 +190,18 @@ module.exports = async function handler(req, res) {
       ok: true,
       duplicate: false,
       id: String(issue.number),
-      message: "You’re on the list",
+      message: "Thanks — we will respond shortly.",
     });
   } catch (err) {
     console.error("subscribe error", err && err.message, err && err.data);
-    return json(res, err.status && err.status < 500 ? err.status : 500, {
+    // GitHub abuse / rate limit surfaces as 403/429
+    if (err.status === 403 || err.status === 429) {
+      return json(res, 503, {
+        ok: false,
+        error: "Service is busy. Please try again later.",
+      });
+    }
+    return json(res, 500, {
       ok: false,
       error: "Could not save signup. Please try again shortly.",
     });
