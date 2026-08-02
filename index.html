@@ -2,423 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>PBCRun — Request an Invitation</title>
-  <meta name="description" content="PBCRun is the guide to Pebble Beach Car Week — every event, official and satellite, free and ticketed, plus the cars competing at each one. Request an invitation." />
+  <meta name="description" content="PBCRun — unofficial Monterey Car Week companion. Request an invitation for early access." />
   <meta name="theme-color" content="#faf8f4" />
+  <meta name="color-scheme" content="light" />
   <meta property="og:title" content="PBCRun — Request an Invitation" />
   <meta property="og:description" content="Unofficial Monterey Car Week companion. Request an invitation for early access." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://pbcrun.com/" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23faf8f4'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='13' font-family='Georgia,serif' fill='%23c9a04a'%3EP%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23faf8f4'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='13' font-family='Georgia,serif' fill='%238a6b28'%3EP%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=Noto+Sans+Arabic:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #faf8f4;
-      --ink: #2c2825;
-      --muted: #8a847c;
-      --gold: #c9a04a;
-      --line: #e6dfd2;
-      --card: #ffffff;
-      --placeholder: #b5aea3;
-      --error: #b54a4a;
-      --ok: #3d7a52;
-    }
-
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      min-height: 100%;
-      font-family: Inter, "Noto Sans JP", "Noto Sans SC", "Noto Sans KR", "Noto Sans Arabic", system-ui, -apple-system, sans-serif;
-      color: var(--ink);
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    html[lang="ar"] body,
-    html[dir="rtl"] body {
-      font-family: "Noto Sans Arabic", Inter, system-ui, sans-serif;
-    }
-
-    .lang-bar {
-      width: min(100% - 1.5rem, 40rem);
-      margin: 0.85rem auto 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.3rem 0.35rem;
-    }
-
-    .lang-bar button {
-      appearance: none;
-      border: 1px solid transparent;
-      background: transparent;
-      color: var(--muted);
-      font: inherit;
-      font-size: 0.68rem;
-      letter-spacing: 0.04em;
-      padding: 0.28rem 0.45rem;
-      cursor: pointer;
-      border-radius: 999px;
-      transition: color 0.12s ease, border-color 0.12s ease, background 0.12s ease;
-    }
-
-    .lang-bar button:hover {
-      color: var(--ink);
-      border-color: var(--line);
-    }
-
-    .lang-bar button[aria-pressed="true"] {
-      color: var(--gold);
-      border-color: rgba(201, 160, 74, 0.45);
-      background: rgba(201, 160, 74, 0.08);
-      font-weight: 500;
-    }
-
-    .page {
-      flex: 1;
-      width: min(100% - 2.5rem, 28rem);
-      margin: 0 auto;
-      padding: clamp(1.5rem, 5vh, 3rem) 0 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .wordmark {
-      margin: 0;
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-weight: 500;
-      font-size: 1.35rem;
-      letter-spacing: 0.04em;
-      color: var(--gold);
-    }
-
-    .route {
-      width: min(100%, 12rem);
-      height: 2.25rem;
-      margin: 1.15rem 0 1.35rem;
-      color: var(--gold);
-    }
-
-    .eyebrow {
-      margin: 0 0 1rem;
-      font-size: 0.7rem;
-      font-weight: 400;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-
-    html[lang="ja"] .eyebrow,
-    html[lang="zh"] .eyebrow,
-    html[lang="ko"] .eyebrow,
-    html[lang="ar"] .eyebrow {
-      letter-spacing: 0.12em;
-    }
-
-    h1 {
-      margin: 0;
-      font-family: "Cormorant Garamond", Georgia, "Noto Sans JP", "Noto Sans SC", "Noto Sans KR", serif;
-      font-weight: 500;
-      font-size: clamp(2rem, 7vw, 2.75rem);
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      color: var(--ink);
-    }
-
-    h1 .to {
-      font-style: italic;
-      font-weight: 400;
-    }
-
-    h1 .place {
-      color: var(--gold);
-      font-style: italic;
-      font-weight: 500;
-    }
-
-    html[lang="ja"] h1 .to,
-    html[lang="ja"] h1 .place,
-    html[lang="zh"] h1 .to,
-    html[lang="zh"] h1 .place,
-    html[lang="ko"] h1 .to,
-    html[lang="ko"] h1 .place,
-    html[lang="ar"] h1 .to,
-    html[lang="ar"] h1 .place {
-      font-style: normal;
-    }
-
-    .lede {
-      margin: 1.25rem 0 0;
-      max-width: 26rem;
-      font-size: 0.98rem;
-      font-weight: 300;
-      line-height: 1.65;
-      color: var(--muted);
-    }
-
-    .countdown {
-      margin: 2.25rem 0 0;
-      width: 100%;
-    }
-
-    .countdown-row {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 0.35rem;
-    }
-
-    .cd-unit { min-width: 3.1rem; }
-
-    .cd-value {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: clamp(1.85rem, 6vw, 2.35rem);
-      font-weight: 500;
-      line-height: 1;
-      color: var(--ink);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .cd-label {
-      margin-top: 0.4rem;
-      font-size: 0.58rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 400;
-    }
-
-    .cd-sep {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 1.5rem;
-      color: var(--gold);
-      padding-top: 0.15rem;
-      opacity: 0.85;
-      user-select: none;
-    }
-
-    .countdown-caption {
-      margin: 0.9rem 0 0;
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 400;
-    }
-
-    .card {
-      width: 100%;
-      margin-top: 2.25rem;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 2px;
-      padding: 1.6rem 1.4rem 1.35rem;
-      text-align: start;
-      box-shadow: 0 1px 0 rgba(44, 40, 37, 0.02);
-    }
-
-    .card-title {
-      margin: 0 0 1rem;
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 1.45rem;
-      font-weight: 500;
-      text-align: center;
-      color: var(--ink);
-    }
-
-    .card label.field-label {
-      display: block;
-      font-size: 0.62rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-      margin-bottom: 0.65rem;
-    }
-
-    .card .field { margin-bottom: 1rem; }
-
-    .card input[type="email"],
-    .card input[type="text"],
-    .card select {
-      width: 100%;
-      border: 0;
-      border-bottom: 1px solid var(--line);
-      background: transparent;
-      padding: 0.35rem 0 0.75rem;
-      font-family: "Cormorant Garamond", Georgia, "Noto Sans JP", "Noto Sans SC", "Noto Sans KR", "Noto Sans Arabic", serif;
-      font-size: 1.15rem;
-      font-style: italic;
-      color: var(--ink);
-      outline: none;
-      border-radius: 0;
-      appearance: none;
-    }
-
-    .card select {
-      font-style: normal;
-      font-family: Inter, "Noto Sans JP", "Noto Sans SC", "Noto Sans KR", "Noto Sans Arabic", system-ui, sans-serif;
-      font-size: 0.92rem;
-      padding-bottom: 0.65rem;
-      background: transparent
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23c9a04a' d='M1 1l5 5 5-5'/%3E%3C/svg%3E")
-        no-repeat right 0.15rem center;
-    }
-
-    html[dir="rtl"] .card select {
-      background-position: left 0.15rem center;
-    }
-
-    .card input::placeholder {
-      color: var(--placeholder);
-      font-style: italic;
-    }
-
-    .card input:focus,
-    .card select:focus {
-      border-bottom-color: var(--gold);
-    }
-
-    .card .consent {
-      display: flex;
-      gap: 0.55rem;
-      align-items: flex-start;
-      margin: 0.25rem 0 0.15rem;
-      font-size: 0.72rem;
-      line-height: 1.45;
-      color: var(--muted);
-      font-weight: 300;
-    }
-
-    .card .consent input {
-      margin-top: 0.15rem;
-      accent-color: var(--gold);
-      flex-shrink: 0;
-    }
-
-    .hp {
-      position: absolute;
-      left: -9999px;
-      opacity: 0;
-      height: 0;
-      width: 0;
-      overflow: hidden;
-    }
-
-    .card button[type="submit"] {
-      width: 100%;
-      margin-top: 1.35rem;
-      appearance: none;
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--ink);
-      font-family: "Cormorant Garamond", Georgia, "Noto Sans JP", "Noto Sans SC", "Noto Sans KR", "Noto Sans Arabic", serif;
-      font-size: 1.15rem;
-      font-style: italic;
-      font-weight: 400;
-      padding: 0.85rem 1rem;
-      cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-    }
-
-    html[lang="ja"] .card button[type="submit"],
-    html[lang="zh"] .card button[type="submit"],
-    html[lang="ko"] .card button[type="submit"],
-    html[lang="ar"] .card button[type="submit"] {
-      font-style: normal;
-    }
-
-    .card button[type="submit"]:hover:not(:disabled) {
-      background: var(--gold);
-      color: #fff;
-      border-color: var(--gold);
-    }
-
-    .card button[type="submit"]:disabled {
-      opacity: 0.55;
-      cursor: wait;
-    }
-
-    .hint {
-      margin: 0.95rem 0 0;
-      text-align: center;
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-style: italic;
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
-    .status {
-      margin: 0.65rem 0 0;
-      min-height: 1.1rem;
-      text-align: center;
-      font-size: 0.82rem;
-      line-height: 1.4;
-    }
-
-    .status.error { color: var(--error); }
-    .status.ok { color: var(--ok); }
-
-    .card.is-success .form-fields { display: none; }
-    .success {
-      display: none;
-      text-align: center;
-      padding: 0.5rem 0.25rem;
-    }
-    .card.is-success .success { display: block; }
-    .success h2 {
-      margin: 0 0 0.5rem;
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-weight: 500;
-      font-size: 1.65rem;
-      color: var(--ink);
-    }
-    .success p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.55;
-      font-weight: 300;
-    }
-
-    footer {
-      width: min(100% - 2.5rem, 36rem);
-      margin: 0 auto 1.75rem;
-      text-align: center;
-      font-size: 0.72rem;
-      line-height: 1.55;
-      color: #a8a29a;
-      font-weight: 300;
-    }
-
-    .optional {
-      opacity: 0.6;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      text-transform: none;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=Noto+Sans+Arabic:wght@400;500&family=Noto+Sans+JP:wght@400;500&family=Noto+Sans+SC:wght@400;500&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/site.css" />
 </head>
 <body>
-  <nav class="lang-bar" id="lang-bar" aria-label="Language"></nav>
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to main content</a>
 
-  <main class="page">
-    <p class="wordmark">PBCRun</p>
+  <header class="top">
+    <nav class="lang-bar" id="lang-bar" data-i18n-aria="lang_label" aria-label="Language"></nav>
+  </header>
 
-    <svg class="route" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M8 28 C 40 28, 48 12, 72 14 C 96 16, 108 30, 132 26 C 156 22, 168 10, 192 12" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" />
-      <circle cx="8" cy="28" r="2.4" fill="currentColor" />
-      <circle cx="72" cy="14" r="2.4" fill="currentColor" />
-      <circle cx="132" cy="26" r="2.4" fill="currentColor" />
-      <circle cx="192" cy="12" r="2.4" fill="currentColor" />
+  <main id="main" class="page" tabindex="-1">
+    <p class="wordmark" data-i18n-aria="wordmark_aria" aria-label="PBCRun">PBCRun</p>
+
+    <svg class="route" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true">
+      <path d="M8 28 C 40 28, 48 12, 72 14 C 96 16, 108 30, 132 26 C 156 22, 168 10, 192 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      <circle cx="8" cy="28" r="2.6" fill="currentColor" />
+      <circle cx="72" cy="14" r="2.6" fill="currentColor" />
+      <circle cx="132" cy="26" r="2.6" fill="currentColor" />
+      <circle cx="192" cy="12" r="2.6" fill="currentColor" />
     </svg>
 
     <p class="eyebrow" data-i18n="eyebrow">Car Week 2026</p>
@@ -429,38 +43,42 @@
       <span class="place" data-i18n="headline_place">Pebble Beach</span>
     </h1>
 
-    <p class="lede" data-i18n="lede">
-      PBCRun is the guide to Pebble Beach Car Week — every event, official and satellite, free and ticketed, plus the cars competing at each one.
-    </p>
-
-    <div class="countdown" aria-live="polite" aria-atomic="true">
+    <div
+      class="countdown"
+      id="countdown"
+      role="timer"
+      data-i18n-aria="countdown_aria"
+      aria-label="Countdown until Car Week begins"
+      aria-live="off"
+    >
       <div class="countdown-row">
         <div class="cd-unit">
-          <div class="cd-value" id="cd-days">–</div>
+          <div class="cd-value" id="cd-days" aria-hidden="true">–</div>
           <div class="cd-label" data-i18n="days">Days</div>
         </div>
         <div class="cd-sep" aria-hidden="true">:</div>
         <div class="cd-unit">
-          <div class="cd-value" id="cd-hours">–</div>
+          <div class="cd-value" id="cd-hours" aria-hidden="true">–</div>
           <div class="cd-label" data-i18n="hours">Hours</div>
         </div>
         <div class="cd-sep" aria-hidden="true">:</div>
         <div class="cd-unit">
-          <div class="cd-value" id="cd-mins">–</div>
+          <div class="cd-value" id="cd-mins" aria-hidden="true">–</div>
           <div class="cd-label" data-i18n="mins">Mins</div>
         </div>
         <div class="cd-sep" aria-hidden="true">:</div>
         <div class="cd-unit">
-          <div class="cd-value" id="cd-secs">–</div>
+          <div class="cd-value" id="cd-secs" aria-hidden="true">–</div>
           <div class="cd-label" data-i18n="secs">Secs</div>
         </div>
       </div>
       <p class="countdown-caption" data-i18n="until">Until Car Week begins</p>
+      <p class="sr-only" id="countdown-sr" aria-live="polite"></p>
     </div>
 
-    <section class="card" id="card">
+    <section class="card" id="card" aria-labelledby="request-title">
       <div class="form-fields">
-        <h2 class="card-title" data-i18n="request_title">Request Invitation</h2>
+        <h2 class="card-title" id="request-title" data-i18n="request_title">Request Invitation</h2>
         <form id="invite-form" action="/api/subscribe" method="POST" novalidate>
           <div class="hp" aria-hidden="true">
             <label for="website">Website</label>
@@ -468,7 +86,7 @@
           </div>
 
           <div class="field">
-            <label class="field-label" id="email-label" for="email" data-i18n="email">Email</label>
+            <label class="field-label" for="email" data-i18n="email">Email</label>
             <input
               id="email"
               name="email"
@@ -476,9 +94,11 @@
               required
               autocomplete="email"
               inputmode="email"
+              enterkeyhint="next"
               data-i18n-placeholder="email_ph"
               placeholder="you@domain.com"
-              aria-describedby="form-status form-hint"
+              aria-required="true"
+              aria-describedby="form-hint form-status"
             />
           </div>
 
@@ -487,7 +107,7 @@
               <span data-i18n="name">Name</span>
               <span class="optional" data-i18n="optional">(optional)</span>
             </label>
-            <input id="name" name="name" type="text" autocomplete="name" data-i18n-placeholder="name_ph" placeholder="Your name" />
+            <input id="name" name="name" type="text" autocomplete="name" enterkeyhint="next" data-i18n-placeholder="name_ph" placeholder="Your name" />
           </div>
 
           <div class="field">
@@ -509,517 +129,38 @@
             </select>
           </div>
 
-          <label class="consent">
-            <input id="consent" name="consent" type="checkbox" value="true" required />
-            <span data-i18n="consent">I agree to be contacted about PBCRun early access. We won’t sell your email.</span>
-          </label>
+          <div class="consent-row">
+            <input id="consent" name="consent" type="checkbox" value="true" required aria-required="true" />
+            <label for="consent">
+              <span data-i18n="consent">I agree to be contacted about PBCRun early access and I have read the Privacy Policy.</span>
+              <a class="inline-link" id="consent-privacy-link" href="/privacy.html">Privacy Policy</a>
+            </label>
+          </div>
 
           <button type="submit" id="submit-btn" data-i18n="cta">Request Invitation</button>
           <p class="hint" id="form-hint" data-i18n="hint">Join the list for early access before Car Week</p>
-          <p class="status" id="form-status" role="status"></p>
+          <p class="status" id="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
 
-      <div class="success" id="success-block">
+      <div class="success" id="success-block" role="status" aria-live="polite">
         <h2 data-i18n="success_title">You’re on the list</h2>
         <p data-i18n="success_body">Thanks — we’ll email your invitation when access opens.</p>
       </div>
     </section>
   </main>
 
-  <footer data-i18n="footer">
-    PBCRun is an independent, unofficial guide to Car Week. It is not affiliated with, endorsed by, or
-    sponsored by the Pebble Beach Concours d’Elegance, Pebble Beach Company, or any official Car
-    Week organizer.
+  <footer class="site-footer">
+    <p data-i18n="footer">
+      PBCRun is an independent, unofficial guide to Car Week. It is not affiliated with, endorsed by, or
+      sponsored by the Pebble Beach Concours d’Elegance, Pebble Beach Company, or any official Car Week organizer.
+    </p>
+    <p class="footer-links">
+      <a id="footer-privacy" href="/privacy.html" data-i18n="privacy_link">Privacy Policy</a>
+    </p>
   </footer>
 
-  <script>
-    (function () {
-      var TARGET = new Date("2026-08-07T00:00:00-07:00").getTime();
-      var LANG_KEY = "pbcrun_lang";
-
-      var LANGS = [
-        { code: "en", label: "EN", dir: "ltr" },
-        { code: "it", label: "IT", dir: "ltr" },
-        { code: "de", label: "DE", dir: "ltr" },
-        { code: "fr", label: "FR", dir: "ltr" },
-        { code: "es", label: "ES", dir: "ltr" },
-        { code: "ru", label: "RU", dir: "ltr" },
-        { code: "ar", label: "العربية", dir: "rtl" },
-        { code: "ja", label: "日本語", dir: "ltr" },
-        { code: "ko", label: "한국어", dir: "ltr" },
-        { code: "zh", label: "中文", dir: "ltr" }
-      ];
-
-      var T = {
-        en: {
-          title: "PBCRun — Request an Invitation",
-          eyebrow: "Car Week 2026",
-          headline_line1: "Your Companion Guide",
-          headline_to: "to",
-          headline_place: "Pebble Beach",
-          lede: "PBCRun is the guide to Pebble Beach Car Week — every event, official and satellite, free and ticketed, plus the cars competing at each one.",
-          days: "Days", hours: "Hours", mins: "Mins", secs: "Secs",
-          until: "Until Car Week begins",
-          request_title: "Request Invitation",
-          email: "Email", email_ph: "you@domain.com",
-          name: "Name", optional: "(optional)", name_ph: "Your name",
-          attending: "At Car Week 2026?", select: "Select…",
-          attending_yes: "Yes — I’ll be there", attending_maybe: "Maybe", attending_no: "Following from afar",
-          platform: "Interested in", platform_both: "iPhone app & web", platform_ios: "iPhone app", platform_web: "Web guide",
-          consent: "I agree to be contacted about PBCRun early access. We won’t sell your email.",
-          cta: "Request Invitation",
-          hint: "Join the list for early access before Car Week",
-          success_title: "You’re on the list",
-          success_body: "Thanks — we’ll email your invitation when access opens.",
-          footer: "PBCRun is an independent, unofficial guide to Car Week. It is not affiliated with, endorsed by, or sponsored by the Pebble Beach Concours d’Elegance, Pebble Beach Company, or any official Car Week organizer.",
-          err_email: "Please enter a valid email address.",
-          err_consent: "Please agree so we can email your invitation.",
-          sending: "Sending…",
-          err_generic: "Something went wrong. Please try again.",
-          err_network: "Network error. Check your connection and try again."
-        },
-        it: {
-          title: "PBCRun — Richiedi un invito",
-          eyebrow: "Car Week 2026",
-          headline_line1: "La tua guida di compagnia",
-          headline_to: "a",
-          headline_place: "Pebble Beach",
-          lede: "PBCRun è la guida alla Pebble Beach Car Week — ogni evento, ufficiale e collaterale, gratuito e a pagamento, più le auto in gara a ciascuno.",
-          days: "Giorni", hours: "Ore", mins: "Min", secs: "Sec",
-          until: "All’inizio della Car Week",
-          request_title: "Richiedi invito",
-          email: "Email", email_ph: "tu@email.com",
-          name: "Nome", optional: "(facoltativo)", name_ph: "Il tuo nome",
-          attending: "Alla Car Week 2026?", select: "Seleziona…",
-          attending_yes: "Sì — ci sarò", attending_maybe: "Forse", attending_no: "Seguo da lontano",
-          platform: "Mi interessa", platform_both: "App iPhone e web", platform_ios: "App iPhone", platform_web: "Guida web",
-          consent: "Accetto di essere contattato per l’accesso anticipato a PBCRun. Non venderemo la tua email.",
-          cta: "Richiedi invito",
-          hint: "Iscriviti per l’accesso anticipato prima della Car Week",
-          success_title: "Sei in lista",
-          success_body: "Grazie — ti invieremo l’invito quando l’accesso sarà aperto.",
-          footer: "PBCRun è una guida indipendente e non ufficiale alla Car Week. Non è affiliata, approvata o sponsorizzata dal Pebble Beach Concours d’Elegance, dalla Pebble Beach Company o da qualsiasi organizzatore ufficiale della Car Week.",
-          err_email: "Inserisci un indirizzo email valido.",
-          err_consent: "Accetta per poterti inviare l’invito.",
-          sending: "Invio…",
-          err_generic: "Qualcosa è andato storto. Riprova.",
-          err_network: "Errore di rete. Controlla la connessione e riprova."
-        },
-        de: {
-          title: "PBCRun — Einladung anfordern",
-          eyebrow: "Car Week 2026",
-          headline_line1: "Ihr Begleitführer",
-          headline_to: "für",
-          headline_place: "Pebble Beach",
-          lede: "PBCRun ist der Guide zur Pebble Beach Car Week — jedes Event, offiziell und parallel, gratis und ticketpflichtig, plus die Autos auf dem Feld.",
-          days: "Tage", hours: "Std.", mins: "Min.", secs: "Sek.",
-          until: "Bis zum Start der Car Week",
-          request_title: "Einladung anfordern",
-          email: "E-Mail", email_ph: "sie@email.com",
-          name: "Name", optional: "(optional)", name_ph: "Ihr Name",
-          attending: "Bei der Car Week 2026?", select: "Auswählen…",
-          attending_yes: "Ja — ich bin da", attending_maybe: "Vielleicht", attending_no: "Von weitem dabei",
-          platform: "Interesse an", platform_both: "iPhone-App & Web", platform_ios: "iPhone-App", platform_web: "Web-Guide",
-          consent: "Ich bin einverstanden, über PBCRun Early Access kontaktiert zu werden. Wir verkaufen Ihre E-Mail nicht.",
-          cta: "Einladung anfordern",
-          hint: "Auf die Liste für Early Access vor der Car Week",
-          success_title: "Sie sind auf der Liste",
-          success_body: "Danke — wir senden Ihre Einladung, sobald der Zugang geöffnet ist.",
-          footer: "PBCRun ist ein unabhängiger, inoffizieller Guide zur Car Week. Nicht verbunden mit, gebilligt oder gesponsert vom Pebble Beach Concours d’Elegance, der Pebble Beach Company oder einem offiziellen Car-Week-Veranstalter.",
-          err_email: "Bitte eine gültige E-Mail-Adresse eingeben.",
-          err_consent: "Bitte zustimmen, damit wir die Einladung senden können.",
-          sending: "Wird gesendet…",
-          err_generic: "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
-          err_network: "Netzwerkfehler. Verbindung prüfen und erneut versuchen."
-        },
-        fr: {
-          title: "PBCRun — Demander une invitation",
-          eyebrow: "Car Week 2026",
-          headline_line1: "Votre guide compagnon",
-          headline_to: "à",
-          headline_place: "Pebble Beach",
-          lede: "PBCRun est le guide de la Pebble Beach Car Week — chaque événement, officiel et parallèle, gratuit et payant, plus les voitures en compétition.",
-          days: "Jours", hours: "Heures", mins: "Min", secs: "Sec",
-          until: "Jusqu’au début de la Car Week",
-          request_title: "Demander une invitation",
-          email: "E-mail", email_ph: "vous@email.com",
-          name: "Nom", optional: "(facultatif)", name_ph: "Votre nom",
-          attending: "À la Car Week 2026 ?", select: "Choisir…",
-          attending_yes: "Oui — j’y serai", attending_maybe: "Peut-être", attending_no: "Je suis de loin",
-          platform: "Intéressé par", platform_both: "App iPhone et web", platform_ios: "App iPhone", platform_web: "Guide web",
-          consent: "J’accepte d’être contacté pour l’accès anticipé PBCRun. Nous ne vendrons pas votre e-mail.",
-          cta: "Demander une invitation",
-          hint: "Rejoignez la liste pour un accès anticipé avant la Car Week",
-          success_title: "Vous êtes sur la liste",
-          success_body: "Merci — nous vous enverrons l’invitation dès l’ouverture de l’accès.",
-          footer: "PBCRun est un guide indépendant et non officiel de la Car Week. Il n’est ni affilié, ni approuvé, ni parrainé par le Pebble Beach Concours d’Elegance, la Pebble Beach Company ou tout organisateur officiel de la Car Week.",
-          err_email: "Veuillez saisir une adresse e-mail valide.",
-          err_consent: "Veuillez accepter pour recevoir votre invitation.",
-          sending: "Envoi…",
-          err_generic: "Une erreur s’est produite. Réessayez.",
-          err_network: "Erreur réseau. Vérifiez la connexion et réessayez."
-        },
-        es: {
-          title: "PBCRun — Solicitar invitación",
-          eyebrow: "Car Week 2026",
-          headline_line1: "Tu guía de compañía",
-          headline_to: "a",
-          headline_place: "Pebble Beach",
-          lede: "PBCRun es la guía de la Pebble Beach Car Week: cada evento, oficial y paralelo, gratis y de pago, más los coches que compiten en cada uno.",
-          days: "Días", hours: "Horas", mins: "Min", secs: "Seg",
-          until: "Hasta que empiece la Car Week",
-          request_title: "Solicitar invitación",
-          email: "Correo", email_ph: "tu@email.com",
-          name: "Nombre", optional: "(opcional)", name_ph: "Tu nombre",
-          attending: "¿En la Car Week 2026?", select: "Elegir…",
-          attending_yes: "Sí — estaré allí", attending_maybe: "Quizá", attending_no: "Sigo desde lejos",
-          platform: "Me interesa", platform_both: "App iPhone y web", platform_ios: "App iPhone", platform_web: "Guía web",
-          consent: "Acepto que me contacten sobre el acceso anticipado a PBCRun. No venderemos tu correo.",
-          cta: "Solicitar invitación",
-          hint: "Únete a la lista para acceso anticipado antes de la Car Week",
-          success_title: "Estás en la lista",
-          success_body: "Gracias — te enviaremos la invitación cuando se abra el acceso.",
-          footer: "PBCRun es una guía independiente y no oficial de la Car Week. No está afiliada, respaldada ni patrocinada por el Pebble Beach Concours d’Elegance, Pebble Beach Company ni ningún organizador oficial de la Car Week.",
-          err_email: "Introduce un correo electrónico válido.",
-          err_consent: "Acepta para que podamos enviarte la invitación.",
-          sending: "Enviando…",
-          err_generic: "Algo salió mal. Inténtalo de nuevo.",
-          err_network: "Error de red. Comprueba la conexión e inténtalo de nuevo."
-        },
-        ar: {
-          title: "PBCRun — اطلب دعوة",
-          eyebrow: "أسبوع السيارات 2026",
-          headline_line1: "دليلك المرافق",
-          headline_to: "إلى",
-          headline_place: "بيبل بيتش",
-          lede: "PBCRun هو دليل أسبوع سيارات بيبل بيتش — كل الفعاليات الرسمية والفرعية، المجانية والمدفوعة، إضافة إلى السيارات المشاركة في كل منها.",
-          days: "أيام", hours: "ساعات", mins: "دقائق", secs: "ثوانٍ",
-          until: "حتى بداية أسبوع السيارات",
-          request_title: "اطلب دعوة",
-          email: "البريد الإلكتروني", email_ph: "you@domain.com",
-          name: "الاسم", optional: "(اختياري)", name_ph: "اسمك",
-          attending: "هل ستحضر أسبوع السيارات 2026؟", select: "اختر…",
-          attending_yes: "نعم — سأكون هناك", attending_maybe: "ربما", attending_no: "أتابع من بعيد",
-          platform: "مهتم بـ", platform_both: "تطبيق iPhone والويب", platform_ios: "تطبيق iPhone", platform_web: "دليل الويب",
-          consent: "أوافق على التواصل معي بشأن الوصول المبكر إلى PBCRun. لن نبيع بريدك الإلكتروني.",
-          cta: "اطلب دعوة",
-          hint: "انضم إلى القائمة للوصول المبكر قبل أسبوع السيارات",
-          success_title: "أنت على القائمة",
-          success_body: "شكرًا — سنرسل دعوتك عندما يُفتح الوصول.",
-          footer: "PBCRun دليل مستقل وغير رسمي لأسبوع السيارات. غير تابع لـ Pebble Beach Concours d’Elegance أو Pebble Beach Company أو أي منظم رسمي لأسبوع السيارات، ولا يحظى بدعمهم أو رعايتهم.",
-          err_email: "يرجى إدخال بريد إلكتروني صالح.",
-          err_consent: "يرجى الموافقة حتى نتمكن من إرسال الدعوة.",
-          sending: "جارٍ الإرسال…",
-          err_generic: "حدث خطأ. حاول مرة أخرى.",
-          err_network: "خطأ في الشبكة. تحقق من الاتصال وحاول مرة أخرى."
-        },
-        ja: {
-          title: "PBCRun — 招待をリクエスト",
-          eyebrow: "カーウィーク 2026",
-          headline_line1: "あなたの同行ガイド",
-          headline_to: "—",
-          headline_place: "ペブルビーチ",
-          lede: "PBCRunはペブルビーチ・カーウィークのガイドです。公式・関連のすべてのイベント、無料・有料を問わず、各会場で競う車までカバーします。",
-          days: "日", hours: "時間", mins: "分", secs: "秒",
-          until: "カーウィーク開始まで",
-          request_title: "招待をリクエスト",
-          email: "メール", email_ph: "you@domain.com",
-          name: "お名前", optional: "（任意）", name_ph: "お名前",
-          attending: "2026年カーウィークに参加しますか？", select: "選択…",
-          attending_yes: "はい — 現地に行きます", attending_maybe: "未定", attending_no: "遠方からフォロー",
-          platform: "ご興味", platform_both: "iPhoneアプリとウェブ", platform_ios: "iPhoneアプリ", platform_web: "ウェブガイド",
-          consent: "PBCRunの早期アクセスについて連絡を受けることに同意します。メールアドレスを販売しません。",
-          cta: "招待をリクエスト",
-          hint: "カーウィーク前の早期アクセスに登録",
-          success_title: "リストに登録されました",
-          success_body: "ありがとうございます。アクセス開始時に招待メールをお送りします。",
-          footer: "PBCRunはカーウィークの独立した非公式ガイドです。Pebble Beach Concours d’Elegance、Pebble Beach Company、または公式のカーウィーク主催者とは提携・承認・スポンサー関係にありません。",
-          err_email: "有効なメールアドレスを入力してください。",
-          err_consent: "招待メール送付のため同意が必要です。",
-          sending: "送信中…",
-          err_generic: "エラーが発生しました。もう一度お試しください。",
-          err_network: "ネットワークエラー。接続を確認して再試行してください。"
-        },
-        zh: {
-          title: "PBCRun — 申请邀请",
-          eyebrow: "汽车周 2026",
-          headline_line1: "您的同行指南",
-          headline_to: "—",
-          headline_place: "圆石滩",
-          lede: "PBCRun 是圆石滩汽车周指南——涵盖每场官方与周边活动、免费与购票活动，以及各展会的参赛车辆。",
-          days: "天", hours: "时", mins: "分", secs: "秒",
-          until: "距汽车周开始",
-          request_title: "申请邀请",
-          email: "邮箱", email_ph: "you@domain.com",
-          name: "姓名", optional: "（选填）", name_ph: "您的姓名",
-          attending: "会参加 2026 汽车周吗？", select: "请选择…",
-          attending_yes: "会 — 我会到场", attending_maybe: "可能", attending_no: "远程关注",
-          platform: "感兴趣的平台", platform_both: "iPhone 应用与网页", platform_ios: "iPhone 应用", platform_web: "网页指南",
-          consent: "我同意就 PBCRun 抢先体验与我联系。我们不会出售您的邮箱。",
-          cta: "申请邀请",
-          hint: "加入名单，在汽车周前获得抢先访问",
-          success_title: "您已在名单中",
-          success_body: "谢谢 — 开放访问时我们会发送邀请邮件。",
-          footer: "PBCRun 是汽车周的独立非官方指南。与 Pebble Beach Concours d’Elegance、Pebble Beach Company 或任何官方汽车周主办方均无关联、背书或赞助关系。",
-          err_email: "请输入有效的邮箱地址。",
-          err_consent: "请同意以便我们发送邀请。",
-          sending: "发送中…",
-          err_generic: "出错了，请重试。",
-          err_network: "网络错误，请检查连接后重试。"
-        },
-        ko: {
-          title: "PBCRun — 초대 요청",
-          eyebrow: "카 위크 2026",
-          headline_line1: "당신의 동반 가이드",
-          headline_to: "—",
-          headline_place: "페블 비치",
-          lede: "PBCRun은 페블 비치 카 위크 가이드입니다. 공식·위성 행사, 무료·유료 이벤트, 각 쇼에 출전하는 차량까지 모두 담습니다.",
-          days: "일", hours: "시간", mins: "분", secs: "초",
-          until: "카 위크 시작까지",
-          request_title: "초대 요청",
-          email: "이메일", email_ph: "you@domain.com",
-          name: "이름", optional: "(선택)", name_ph: "이름",
-          attending: "2026 카 위크에 참석하시나요?", select: "선택…",
-          attending_yes: "네 — 현장에 갑니다", attending_maybe: "미정", attending_no: "원격으로 팔로우",
-          platform: "관심 플랫폼", platform_both: "iPhone 앱 & 웹", platform_ios: "iPhone 앱", platform_web: "웹 가이드",
-          consent: "PBCRun 조기 이용에 대해 연락받는 것에 동의합니다. 이메일을 판매하지 않습니다.",
-          cta: "초대 요청",
-          hint: "카 위크 전 조기 이용을 위해 명단에 등록하세요",
-          success_title: "명단에 등록되었습니다",
-          success_body: "감사합니다 — 이용이 열리면 초대 이메일을 보내 드립니다.",
-          footer: "PBCRun은 카 위크의 독립·비공식 가이드입니다. Pebble Beach Concours d’Elegance, Pebble Beach Company 또는 공식 카 위크 주최자와 제휴·승인·후원 관계가 없습니다.",
-          err_email: "유효한 이메일 주소를 입력해 주세요.",
-          err_consent: "초대를 보내려면 동의가 필요합니다.",
-          sending: "전송 중…",
-          err_generic: "문제가 발생했습니다. 다시 시도해 주세요.",
-          err_network: "네트워크 오류. 연결을 확인하고 다시 시도해 주세요."
-        },
-        ru: {
-          title: "PBCRun — Запросить приглашение",
-          eyebrow: "Car Week 2026",
-          headline_line1: "Ваш гид-компаньон",
-          headline_to: "по",
-          headline_place: "Pebble Beach",
-          lede: "PBCRun — гид по Pebble Beach Car Week: каждое событие, официальное и параллельное, бесплатное и платное, плюс автомобили на каждом показе.",
-          days: "Дни", hours: "Часы", mins: "Мин", secs: "Сек",
-          until: "До начала Car Week",
-          request_title: "Запросить приглашение",
-          email: "Эл. почта", email_ph: "you@domain.com",
-          name: "Имя", optional: "(необязательно)", name_ph: "Ваше имя",
-          attending: "На Car Week 2026?", select: "Выберите…",
-          attending_yes: "Да — буду на месте", attending_maybe: "Возможно", attending_no: "Слежу издалека",
-          platform: "Интересует", platform_both: "Приложение iPhone и веб", platform_ios: "Приложение iPhone", platform_web: "Веб-гид",
-          consent: "Я согласен(на) на связь о раннем доступе к PBCRun. Мы не продаём ваш email.",
-          cta: "Запросить приглашение",
-          hint: "Вступите в список раннего доступа до Car Week",
-          success_title: "Вы в списке",
-          success_body: "Спасибо — мы пришлём приглашение, когда откроется доступ.",
-          footer: "PBCRun — независимый неофициальный гид по Car Week. Не связан, не одобрен и не спонсирован Pebble Beach Concours d’Elegance, Pebble Beach Company или любым официальным организатором Car Week.",
-          err_email: "Введите корректный адрес email.",
-          err_consent: "Подтвердите согласие, чтобы мы могли отправить приглашение.",
-          sending: "Отправка…",
-          err_generic: "Что-то пошло не так. Попробуйте снова.",
-          err_network: "Ошибка сети. Проверьте соединение и попробуйте снова."
-        }
-      };
-
-      var currentLang = "en";
-
-      function t(key) {
-        var pack = T[currentLang] || T.en;
-        return pack[key] != null ? pack[key] : (T.en[key] || key);
-      }
-
-      function detectLang() {
-        try {
-          var stored = localStorage.getItem(LANG_KEY);
-          if (stored && T[stored]) return stored;
-        } catch (_) {}
-        try {
-          var q = new URLSearchParams(window.location.search).get("lang");
-          if (q) {
-            q = q.toLowerCase().split("-")[0];
-            if (q === "jp") q = "ja";
-            if (q === "cn") q = "zh";
-            if (q === "kr") q = "ko";
-            if (T[q]) return q;
-          }
-        } catch (_) {}
-        var nav = (navigator.languages && navigator.languages[0]) || navigator.language || "en";
-        nav = String(nav).toLowerCase();
-        if (nav.indexOf("zh") === 0) return "zh";
-        if (nav.indexOf("ja") === 0) return "ja";
-        if (nav.indexOf("ko") === 0) return "ko";
-        if (nav.indexOf("ar") === 0) return "ar";
-        if (nav.indexOf("ru") === 0) return "ru";
-        var short = nav.split("-")[0];
-        if (T[short]) return short;
-        return "en";
-      }
-
-      function applyLang(code) {
-        if (!T[code]) code = "en";
-        currentLang = code;
-        var meta = LANGS.find(function (l) { return l.code === code; }) || LANGS[0];
-        document.documentElement.lang = code === "zh" ? "zh-Hans" : code;
-        document.documentElement.dir = meta.dir;
-        document.title = t("title");
-
-        document.querySelectorAll("[data-i18n]").forEach(function (el) {
-          var key = el.getAttribute("data-i18n");
-          if (key) el.textContent = t(key);
-        });
-        document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
-          var key = el.getAttribute("data-i18n-placeholder");
-          if (key) el.setAttribute("placeholder", t(key));
-        });
-
-        document.querySelectorAll("#lang-bar button").forEach(function (btn) {
-          btn.setAttribute("aria-pressed", btn.getAttribute("data-lang") === code ? "true" : "false");
-        });
-
-        try {
-          localStorage.setItem(LANG_KEY, code);
-        } catch (_) {}
-
-        try {
-          var url = new URL(window.location.href);
-          url.searchParams.set("lang", code);
-          history.replaceState(null, "", url.pathname + url.search + url.hash);
-        } catch (_) {}
-      }
-
-      function buildLangBar() {
-        var bar = document.getElementById("lang-bar");
-        bar.innerHTML = "";
-        LANGS.forEach(function (l) {
-          var btn = document.createElement("button");
-          btn.type = "button";
-          btn.textContent = l.label;
-          btn.setAttribute("data-lang", l.code);
-          btn.setAttribute("aria-label", l.code);
-          btn.addEventListener("click", function () {
-            applyLang(l.code);
-          });
-          bar.appendChild(btn);
-        });
-      }
-
-      function pad(n) {
-        n = Math.max(0, n | 0);
-        return n < 10 ? "0" + n : String(n);
-      }
-
-      function tick() {
-        var now = Date.now();
-        var diff = Math.max(0, TARGET - now);
-        var secs = Math.floor(diff / 1000);
-        var days = Math.floor(secs / 86400);
-        secs -= days * 86400;
-        var hours = Math.floor(secs / 3600);
-        secs -= hours * 3600;
-        var mins = Math.floor(secs / 60);
-        secs -= mins * 60;
-        document.getElementById("cd-days").textContent = String(days);
-        document.getElementById("cd-hours").textContent = pad(hours);
-        document.getElementById("cd-mins").textContent = pad(mins);
-        document.getElementById("cd-secs").textContent = pad(secs);
-      }
-
-      var form = document.getElementById("invite-form");
-      var statusEl = document.getElementById("form-status");
-      var btn = document.getElementById("submit-btn");
-      var card = document.getElementById("card");
-
-      function setStatus(msg, kind) {
-        statusEl.textContent = msg || "";
-        statusEl.className = "status" + (kind ? " " + kind : "");
-      }
-
-      function getUtm(param) {
-        try {
-          return new URLSearchParams(window.location.search).get(param) || "";
-        } catch (_) {
-          return "";
-        }
-      }
-
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        var email = (form.email.value || "").trim();
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          setStatus(t("err_email"), "error");
-          form.email.focus();
-          return;
-        }
-        if (!form.consent.checked) {
-          setStatus(t("err_consent"), "error");
-          return;
-        }
-
-        btn.disabled = true;
-        setStatus(t("sending"));
-
-        var payload = {
-          email: email,
-          name: (form.name.value || "").trim(),
-          attending: form.attending.value || "",
-          platform: form.platform.value || "both",
-          consent: true,
-          language: currentLang,
-          source: getUtm("utm_source") || "landing",
-          utm_source: getUtm("utm_source"),
-          utm_medium: getUtm("utm_medium"),
-          utm_campaign: getUtm("utm_campaign"),
-          referrer: document.referrer || "",
-          page_url: window.location.href,
-          website: form.website ? form.website.value : ""
-        };
-
-        fetch("/api/subscribe", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(payload)
-        })
-          .then(function (res) {
-            return res.json().then(function (body) {
-              return { ok: res.ok, body: body };
-            });
-          })
-          .then(function (result) {
-            if (result.ok && result.body && result.body.ok) {
-              card.classList.add("is-success");
-              setStatus("");
-              try {
-                localStorage.setItem("pbcrun_invite_requested", email);
-              } catch (_) {}
-              return;
-            }
-            var msg = (result.body && result.body.error) || t("err_generic");
-            setStatus(msg, "error");
-            btn.disabled = false;
-          })
-          .catch(function () {
-            setStatus(t("err_network"), "error");
-            btn.disabled = false;
-          });
-      });
-
-      buildLangBar();
-      applyLang(detectLang());
-      tick();
-      setInterval(tick, 1000);
-
-      try {
-        if (localStorage.getItem("pbcrun_invite_requested")) {
-          card.classList.add("is-success");
-        }
-      } catch (_) {}
-    })();
-  </script>
+  <script src="/js/i18n.js" defer></script>
+  <script src="/js/landing.js" defer></script>
 </body>
 </html>
