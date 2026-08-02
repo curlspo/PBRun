@@ -182,7 +182,11 @@
       margin-bottom: 0.65rem;
     }
 
-    .card input[type="email"] {
+    .card .field { margin-bottom: 1rem; }
+
+    .card input[type="email"],
+    .card input[type="text"],
+    .card select {
       width: 100%;
       border: 0;
       border-bottom: 1px solid var(--line);
@@ -194,15 +198,54 @@
       color: var(--ink);
       outline: none;
       border-radius: 0;
+      appearance: none;
     }
 
-    .card input[type="email"]::placeholder {
+    .card select {
+      font-style: normal;
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 0.92rem;
+      padding-bottom: 0.65rem;
+      color: var(--ink);
+      background: transparent
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23c9a04a' d='M1 1l5 5 5-5'/%3E%3C/svg%3E")
+        no-repeat right 0.15rem center;
+    }
+
+    .card input::placeholder {
       color: var(--placeholder);
       font-style: italic;
     }
 
-    .card input[type="email"]:focus {
+    .card input:focus,
+    .card select:focus {
       border-bottom-color: var(--gold);
+    }
+
+    .card .consent {
+      display: flex;
+      gap: 0.55rem;
+      align-items: flex-start;
+      margin: 0.25rem 0 0.15rem;
+      font-size: 0.72rem;
+      line-height: 1.45;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .card .consent input {
+      margin-top: 0.15rem;
+      accent-color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .hp {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+      height: 0;
+      width: 0;
+      overflow: hidden;
     }
 
     .card button[type="submit"] {
@@ -335,23 +378,54 @@
 
     <section class="card" id="card" aria-labelledby="email-label">
       <div class="form-fields">
-        <form id="invite-form" action="https://formsubmit.co/ajax/jhollidayesq@gmail.com" method="POST" novalidate>
-          <input type="hidden" name="_subject" value="PBCRun — Get the Guide" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <form id="invite-form" action="/api/subscribe" method="POST" novalidate>
+          <div class="hp" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
 
-          <label id="email-label" for="email">Email</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            autocomplete="email"
-            inputmode="email"
-            placeholder="you@domain.com"
-            aria-describedby="form-status form-hint"
-          />
+          <div class="field">
+            <label id="email-label" for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+              inputmode="email"
+              placeholder="you@domain.com"
+              aria-describedby="form-status form-hint"
+            />
+          </div>
+
+          <div class="field">
+            <label for="name">Name <span style="opacity:0.6;font-weight:400;letter-spacing:0.08em">(optional)</span></label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" />
+          </div>
+
+          <div class="field">
+            <label for="attending">At Car Week 2026?</label>
+            <select id="attending" name="attending">
+              <option value="">Select…</option>
+              <option value="yes">Yes — I’ll be there</option>
+              <option value="maybe">Maybe</option>
+              <option value="no">Following from afar</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="platform">Interested in</label>
+            <select id="platform" name="platform">
+              <option value="both">iPhone app &amp; web</option>
+              <option value="ios">iPhone app</option>
+              <option value="web">Web guide</option>
+            </select>
+          </div>
+
+          <label class="consent">
+            <input id="consent" name="consent" type="checkbox" value="true" required />
+            <span>I agree to be contacted about PBCRun early access. We won’t sell your email.</span>
+          </label>
 
           <button type="submit" id="submit-btn">Get the Guide</button>
           <p class="hint" id="form-hint">Be the first to know when it’s live</p>
@@ -412,6 +486,14 @@
         statusEl.className = "status" + (kind ? " " + kind : "");
       }
 
+      function getUtm(param) {
+        try {
+          return new URLSearchParams(window.location.search).get(param) || "";
+        } catch (_) {
+          return "";
+        }
+      }
+
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         var email = (form.email.value || "").trim();
@@ -420,19 +502,36 @@
           form.email.focus();
           return;
         }
+        if (!form.consent.checked) {
+          setStatus("Please agree so we can email you access.", "error");
+          return;
+        }
 
         btn.disabled = true;
         setStatus("Sending…");
 
-        var data = new FormData(form);
-        data.set("email", email);
-        data.set("source", "pbcrun.com coming soon");
-        data.set("requested_at", new Date().toISOString());
+        var payload = {
+          email: email,
+          name: (form.name.value || "").trim(),
+          attending: form.attending.value || "",
+          platform: form.platform.value || "both",
+          consent: true,
+          source: getUtm("utm_source") || "landing",
+          utm_source: getUtm("utm_source"),
+          utm_medium: getUtm("utm_medium"),
+          utm_campaign: getUtm("utm_campaign"),
+          referrer: document.referrer || "",
+          page_url: window.location.href,
+          website: form.website ? form.website.value : ""
+        };
 
-        fetch(form.action, {
+        fetch("/api/subscribe", {
           method: "POST",
-          body: data,
-          headers: { Accept: "application/json" }
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
         })
           .then(function (res) {
             return res.json().then(function (body) {
@@ -440,7 +539,7 @@
             });
           })
           .then(function (result) {
-            if (result.ok) {
+            if (result.ok && result.body && result.body.ok) {
               card.classList.add("is-success");
               setStatus("");
               try {
@@ -449,7 +548,7 @@
               return;
             }
             var msg =
-              (result.body && (result.body.message || result.body.error)) ||
+              (result.body && result.body.error) ||
               "Something went wrong. Please try again.";
             setStatus(msg, "error");
             btn.disabled = false;

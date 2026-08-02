@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>PBCRun — Waitlist Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #faf8f4;
+      --ink: #2c2825;
+      --muted: #8a847c;
+      --gold: #c9a04a;
+      --line: #e6dfd2;
+      --card: #fff;
+      --error: #b54a4a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+    h1 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 600;
+      font-size: 1.85rem;
+      margin: 0 0 0.25rem;
+    }
+    .sub { color: var(--muted); font-size: 0.9rem; margin: 0 0 1.25rem; }
+    .bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    input[type="password"], input[type="search"] {
+      border: 1px solid var(--line);
+      background: var(--card);
+      padding: 0.55rem 0.7rem;
+      font: inherit;
+      border-radius: 4px;
+      min-width: 12rem;
+    }
+    button {
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.9rem;
+      padding: 0.55rem 0.9rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover { background: var(--gold); color: #fff; }
+    button.primary { background: var(--gold); color: #fff; }
+    .meta { color: var(--muted); font-size: 0.85rem; }
+    .err { color: var(--error); margin: 0.5rem 0; font-size: 0.9rem; }
+    .table-wrap {
+      overflow: auto;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 4px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.55rem 0.65rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      white-space: nowrap;
+    }
+    th {
+      background: #f3efe6;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+    }
+    tr:hover td { background: #fcfaf6; }
+    td.email { font-weight: 500; }
+    a { color: var(--gold); }
+    .login-card {
+      max-width: 22rem;
+      margin: 4rem auto;
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 1.5rem;
+      border-radius: 4px;
+    }
+    .login-card label {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .login-card input { width: 100%; margin-bottom: 0.9rem; }
+    .login-card button { width: 100%; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="login" class="login-card">
+    <h1>Waitlist</h1>
+    <p class="sub">PBCRun admin — enter the admin secret</p>
+    <label for="key">Admin secret</label>
+    <input id="key" type="password" autocomplete="current-password" placeholder="ADMIN_SECRET" />
+    <button class="primary" id="login-btn" type="button">Open list</button>
+    <p class="err" id="login-err"></p>
+  </div>
+
+  <div id="app" class="hidden">
+    <h1>PBCRun waitlist</h1>
+    <p class="sub">Signups before app launch · stored as GitHub issues labeled <code>waitlist</code></p>
+
+    <div class="bar">
+      <input id="q" type="search" placeholder="Filter email or name…" />
+      <button type="button" id="refresh">Refresh</button>
+      <button type="button" id="csv">Export CSV</button>
+      <button type="button" id="logout">Log out</button>
+      <span class="meta" id="count"></span>
+    </div>
+    <p class="err" id="err"></p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Created</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>City</th>
+            <th>Attending</th>
+            <th>Platform</th>
+            <th>Source</th>
+            <th>UTM</th>
+            <th>Status</th>
+            <th>Issue</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var KEY = "pbcrun_admin_key";
+      var rows = [];
+
+      var loginEl = document.getElementById("login");
+      var appEl = document.getElementById("app");
+      var keyInput = document.getElementById("key");
+      var loginErr = document.getElementById("login-err");
+      var errEl = document.getElementById("err");
+      var tbody = document.getElementById("tbody");
+      var countEl = document.getElementById("count");
+      var q = document.getElementById("q");
+
+      function getKey() {
+        return sessionStorage.getItem(KEY) || "";
+      }
+      function setKey(k) {
+        sessionStorage.setItem(KEY, k);
+      }
+      function clearKey() {
+        sessionStorage.removeItem(KEY);
+      }
+
+      function showApp() {
+        loginEl.classList.add("hidden");
+        appEl.classList.remove("hidden");
+      }
+      function showLogin() {
+        appEl.classList.add("hidden");
+        loginEl.classList.remove("hidden");
+      }
+
+      function fmtDate(iso) {
+        if (!iso) return "—";
+        try {
+          return new Date(iso).toLocaleString();
+        } catch {
+          return iso;
+        }
+      }
+
+      function render() {
+        var filter = (q.value || "").trim().toLowerCase();
+        var list = rows;
+        if (filter) {
+          list = rows.filter(function (r) {
+            return (
+              (r.email || "").toLowerCase().indexOf(filter) >= 0 ||
+              (r.name || "").toLowerCase().indexOf(filter) >= 0 ||
+              (r.city || "").toLowerCase().indexOf(filter) >= 0
+            );
+          });
+        }
+        tbody.innerHTML = list
+          .map(function (r) {
+            var utm = [r.utm_source, r.utm_medium, r.utm_campaign]
+              .filter(Boolean)
+              .join(" / ");
+            return (
+              "<tr>" +
+              "<td>" +
+              r.id +
+              "</td>" +
+              "<td>" +
+              fmtDate(r.created_at) +
+              "</td>" +
+              '<td class="email">' +
+              escapeHtml(r.email) +
+              "</td>" +
+              "<td>" +
+              escapeHtml(r.name || "—") +
+              "</td>" +
+              "<td>" +
+              escapeHtml(r.phone || "—") +
+              "</td>" +
+              "<td>" +
+              escapeHtml(r.city || "—") +
+              "</td>" +
+              "<td>" +
+              escapeHtml(r.attending || "—") +
+              "</td>" +
+              "<td>" +
+              escapeHtml(r.platform || "—") +
+              "</td>" +
+              "<td>" +
+              escapeHtml(r.source || "—") +
+              "</td>" +
+              "<td>" +
+              escapeHtml(utm || "—") +
+              "</td>" +
+              "<td>" +
+              escapeHtml(r.status || "pending") +
+              "</td>" +
+              "<td>" +
+              (r.issue_url
+                ? '<a href="' +
+                  r.issue_url +
+                  '" target="_blank" rel="noopener">open</a>'
+                : "—") +
+              "</td>" +
+              "</tr>"
+            );
+          })
+          .join("");
+        countEl.textContent = list.length + " shown · " + rows.length + " total";
+      }
+
+      function escapeHtml(s) {
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function load() {
+        errEl.textContent = "";
+        var key = getKey();
+        return fetch("/api/waitlist?key=" + encodeURIComponent(key))
+          .then(function (res) {
+            return res.json().then(function (body) {
+              return { res: res, body: body };
+            });
+          })
+          .then(function (r) {
+            if (r.res.status === 401) {
+              clearKey();
+              showLogin();
+              loginErr.textContent = "Invalid secret";
+              return;
+            }
+            if (!r.body.ok) {
+              errEl.textContent = r.body.error || "Load failed";
+              return;
+            }
+            rows = r.body.signups || [];
+            showApp();
+            render();
+          })
+          .catch(function () {
+            errEl.textContent = "Network error";
+          });
+      }
+
+      document.getElementById("login-btn").addEventListener("click", function () {
+        loginErr.textContent = "";
+        var k = (keyInput.value || "").trim();
+        if (!k) {
+          loginErr.textContent = "Enter the admin secret";
+          return;
+        }
+        setKey(k);
+        load();
+      });
+
+      document.getElementById("refresh").addEventListener("click", load);
+      document.getElementById("logout").addEventListener("click", function () {
+        clearKey();
+        showLogin();
+      });
+      q.addEventListener("input", render);
+
+      document.getElementById("csv").addEventListener("click", function () {
+        var key = getKey();
+        window.location.href =
+          "/api/waitlist?format=csv&key=" + encodeURIComponent(key);
+      });
+
+      if (getKey()) load();
+    })();
+  </script>
+</body>
+</html>
