@@ -46,7 +46,7 @@ export default function ProfileScreen() {
       <View style={styles.about}>
         <Text style={styles.aboutTitle}>About</Text>
         <Text style={styles.disclaimer}>
-          PBCRun is an unofficial guide not affiliated with the Pebble Beach Concours d’Elegance.
+          PBCRun is an independent guide to Monterey Car Week. Schedules can change — confirm times on each event’s official link.
         </Text>
       </View>
     </ScrollView>

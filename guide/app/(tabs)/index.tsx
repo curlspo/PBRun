@@ -15,13 +15,7 @@ export default function HomeScreen() {
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
       <Text style={styles.brand}>PBCRun</Text>
-      <Text style={styles.eyebrow}>Unofficial Monterey Car Week companion</Text>
-
-      <View style={styles.disclaimer}>
-        <Text style={styles.disclaimerText}>
-          PBCRun is an unofficial guide not affiliated with the Pebble Beach Concours d’Elegance.
-        </Text>
-      </View>
+      <Text style={styles.eyebrow}>Independent guide to Monterey Car Week</Text>
 
       {next ? (
         <View style={styles.panel}>
@@ -78,15 +72,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginBottom: spacing.md,
   },
-  disclaimer: {
-    backgroundColor: colors.chip,
-    borderRadius: 8,
-    padding: spacing.sm,
-    marginBottom: spacing.md,
-    borderWidth: 1,
-    borderColor: colors.line,
-  },
-  disclaimerText: { color: colors.muted, fontSize: 12, lineHeight: 17, textAlign: "center" },
   panel: {
     backgroundColor: colors.card,
     borderRadius: 10,

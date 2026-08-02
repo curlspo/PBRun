@@ -1,9 +1,9 @@
 {
-  "contentVersion": "2026.08.02.2",
+  "contentVersion": "2026.08.02.3",
   "season": "2026",
   "timezone": "America/Los_Angeles",
   "lastContentPass": "2026-08-02",
-  "notes": "A-tier schedule curated from public 2026 calendars (pebblebeachconcours.net, seemonterey.com). Always re-check infoUrl before relying on exact times. Illustrative car rows are labeled in className.",
+  "notes": "Expanded schedule v3. Public 2026 anchors + typical-week planning events. Confirm infoUrl before relying on exact times.",
   "days": [
     "2026-08-07",
     "2026-08-08",
@@ -120,6 +120,46 @@
       "lat": 36.6,
       "lng": -121.89,
       "notes": "Use when the day spans many venues"
+    },
+    {
+      "id": "carmel-mission",
+      "name": "Carmel Mission area",
+      "area": "Carmel",
+      "lat": 36.5427,
+      "lng": -121.9203,
+      "notes": "Scenic Tour corridor and local meets"
+    },
+    {
+      "id": "cannery-row",
+      "name": "Cannery Row",
+      "area": "Monterey",
+      "lat": 36.6177,
+      "lng": -121.9015,
+      "notes": "Tourist corridor; occasional displays"
+    },
+    {
+      "id": "fishermans-wharf",
+      "name": "Fisherman's Wharf",
+      "area": "Monterey",
+      "lat": 36.6054,
+      "lng": -121.8924,
+      "notes": "Downtown Monterey waterfront"
+    },
+    {
+      "id": "barnyard-carmel",
+      "name": "The Barnyard Shopping Village",
+      "area": "Carmel",
+      "lat": 36.542,
+      "lng": -121.908,
+      "notes": "Occasional club meets"
+    },
+    {
+      "id": "bayonet-golf",
+      "name": "Bayonet & Black Horse Golf Club",
+      "area": "Seaside",
+      "lat": 36.638,
+      "lng": -121.822,
+      "notes": "Golf campus used for large shows"
     }
   ],
   "events": [
@@ -142,7 +182,11 @@
       "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
       "ticketUrl": null,
       "tier": "A",
-      "tags": ["tour", "free", "pre-week"],
+      "tags": [
+        "tour",
+        "free",
+        "pre-week"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -164,7 +208,10 @@
       "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
       "ticketUrl": null,
       "tier": "B",
-      "tags": ["planning", "week"],
+      "tags": [
+        "planning",
+        "week"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -186,7 +233,10 @@
       "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
       "ticketUrl": null,
       "tier": "B",
-      "tags": ["satellite", "free"],
+      "tags": [
+        "satellite",
+        "free"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -208,7 +258,9 @@
       "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
       "ticketUrl": null,
       "tier": "B",
-      "tags": ["satellite"],
+      "tags": [
+        "satellite"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -230,7 +282,10 @@
       "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
       "ticketUrl": null,
       "tier": "B",
-      "tags": ["planning", "auction"],
+      "tags": [
+        "planning",
+        "auction"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -252,7 +307,10 @@
       "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
       "ticketUrl": null,
       "tier": "A",
-      "tags": ["auction", "ticketed"],
+      "tags": [
+        "auction",
+        "ticketed"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -274,7 +332,11 @@
       "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
       "ticketUrl": null,
       "tier": "A",
-      "tags": ["auction", "ticketed", "must-see"],
+      "tags": [
+        "auction",
+        "ticketed",
+        "must-see"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -296,7 +358,10 @@
       "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
       "ticketUrl": null,
       "tier": "A",
-      "tags": ["ticketed", "evening"],
+      "tags": [
+        "ticketed",
+        "evening"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -318,7 +383,11 @@
       "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
       "ticketUrl": null,
       "tier": "A",
-      "tags": ["tour", "free", "must-see"],
+      "tags": [
+        "tour",
+        "free",
+        "must-see"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -340,7 +409,10 @@
       "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
       "ticketUrl": null,
       "tier": "A",
-      "tags": ["village", "free"],
+      "tags": [
+        "village",
+        "free"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -362,7 +434,11 @@
       "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
       "ticketUrl": null,
       "tier": "A",
-      "tags": ["forum", "ticketed", "indoor"],
+      "tags": [
+        "forum",
+        "ticketed",
+        "indoor"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -384,7 +460,10 @@
       "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
       "ticketUrl": null,
       "tier": "A",
-      "tags": ["shopping", "ticketed"],
+      "tags": [
+        "shopping",
+        "ticketed"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -406,7 +485,10 @@
       "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
       "ticketUrl": null,
       "tier": "B",
-      "tags": ["tour", "free"],
+      "tags": [
+        "tour",
+        "free"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -428,7 +510,11 @@
       "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
       "ticketUrl": null,
       "tier": "A",
-      "tags": ["concours", "ticketed", "must-see"],
+      "tags": [
+        "concours",
+        "ticketed",
+        "must-see"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -450,7 +536,11 @@
       "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
       "ticketUrl": null,
       "tier": "A",
-      "tags": ["italian", "ticketed", "must-see"],
+      "tags": [
+        "italian",
+        "ticketed",
+        "must-see"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -472,7 +562,10 @@
       "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
       "ticketUrl": null,
       "tier": "B",
-      "tags": ["village", "free"],
+      "tags": [
+        "village",
+        "free"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -494,7 +587,10 @@
       "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
       "ticketUrl": null,
       "tier": "A",
-      "tags": ["racing", "ticketed"],
+      "tags": [
+        "racing",
+        "ticketed"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -516,7 +612,12 @@
       "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
       "ticketUrl": null,
       "tier": "A",
-      "tags": ["free", "wildcard", "fun", "must-see"],
+      "tags": [
+        "free",
+        "wildcard",
+        "fun",
+        "must-see"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -538,7 +639,10 @@
       "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
       "ticketUrl": null,
       "tier": "A",
-      "tags": ["porsche", "club"],
+      "tags": [
+        "porsche",
+        "club"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -560,7 +664,10 @@
       "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
       "ticketUrl": null,
       "tier": "A",
-      "tags": ["racing", "ticketed"],
+      "tags": [
+        "racing",
+        "ticketed"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -582,7 +689,10 @@
       "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
       "ticketUrl": null,
       "tier": "B",
-      "tags": ["village", "free"],
+      "tags": [
+        "village",
+        "free"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -604,7 +714,11 @@
       "infoUrl": "https://www.pebblebeachconcours.net/event/pebble-beach-concours-delegance/",
       "ticketUrl": "https://www.theconcoursstore.com/collections/tickets",
       "tier": "A",
-      "tags": ["concours", "ticketed", "must-see"],
+      "tags": [
+        "concours",
+        "ticketed",
+        "must-see"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -626,7 +740,10 @@
       "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
       "ticketUrl": null,
       "tier": "B",
-      "tags": ["village", "free"],
+      "tags": [
+        "village",
+        "free"
+      ],
       "lastVerifiedAt": "2026-08-02"
     },
     {
@@ -648,7 +765,614 @@
       "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
       "ticketUrl": null,
       "tier": "B",
-      "tags": ["shopping", "ticketed"],
+      "tags": [
+        "shopping",
+        "ticketed"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "fri7-exotics-broadway",
+      "title": "Exotics on Broadway (typical)",
+      "date": "2026-08-07",
+      "startTime": "16:00",
+      "endTime": "20:00",
+      "allDay": false,
+      "access": "free",
+      "venueId": "colonia-plaza",
+      "summary": "Evening exotic and supercar cruise culture as Car Week opens.",
+      "description": "A recurring Car Week–week tradition of exotic cars downtown. Exact block parties and hours shift yearly — treat as a planning cue and confirm on See Monterey / local listings.",
+      "whatToLookFor": [
+        "Supercar arrivals",
+        "Evening crowd energy",
+        "Hotel drop-offs"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "B",
+      "tags": [
+        "satellite",
+        "free",
+        "evening"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "fri7-hotel-meets",
+      "title": "Hotel driveway meets",
+      "date": "2026-08-07",
+      "startTime": "08:00",
+      "endTime": "11:00",
+      "allDay": false,
+      "access": "free",
+      "venueId": "countywide",
+      "summary": "Morning coffee + cars at major peninsula hotels as guests arrive.",
+      "description": "Many visitors start Car Week with informal hotel lobby and driveway gatherings. No single organizer — wander Pebble Beach, Carmel, and Monterey properties with respect for guests and staff.",
+      "whatToLookFor": [
+        "Fresh trailered cars",
+        "Club stickers",
+        "Quiet morning light"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "C",
+      "tags": [
+        "satellite",
+        "free"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "sat8-little-car-show",
+      "title": "The Little Car Show (typical weekend)",
+      "date": "2026-08-08",
+      "startTime": "10:00",
+      "endTime": "16:00",
+      "allDay": false,
+      "access": "free",
+      "venueId": "carmel-ocean-ave",
+      "summary": "Small-displacement classics on Ocean Avenue — confirm 2026 date.",
+      "description": "A beloved free Carmel show focused on cars under roughly 1600–2000cc historically. Date can land on different weekend days; verify 2026 listing before you go.",
+      "whatToLookFor": [
+        "Minis, Fiats, Alfas",
+        "Ocean Ave atmosphere",
+        "Family-friendly browsing"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "A",
+      "tags": [
+        "free",
+        "carmel",
+        "must-see"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "sat8-17-mile",
+      "title": "17-Mile Drive scenic loop",
+      "date": "2026-08-08",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "pebble-beach-lodge",
+      "summary": "Drive or cycle the iconic peninsula road between events (toll / gate access).",
+      "description": "Not a car show, but essential Car Week geography. Expect heavier traffic; budget gate fees and stop time at overlooks. Useful between satellite events.",
+      "whatToLookFor": [
+        "Coastal overlooks",
+        "Lodge approaches",
+        "Tour recon for Thursday"
+      ],
+      "infoUrl": "https://www.pebblebeach.com/",
+      "ticketUrl": null,
+      "tier": "B",
+      "tags": [
+        "scenic",
+        "planning"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "sat8-club-corrals",
+      "title": "Marque club corrals & parking meets",
+      "date": "2026-08-08",
+      "startTime": "08:00",
+      "endTime": "14:00",
+      "allDay": false,
+      "access": "mixed",
+      "venueId": "countywide",
+      "summary": "Ferrari, Porsche, BMW, and more gather in club corrals across the peninsula.",
+      "description": "Saturday is peak club culture. Some corrals are invitation-only; others welcome polite spectators. Check club socials for 2026 pins.",
+      "whatToLookFor": [
+        "Single-marque rows",
+        "Rare limited editions",
+        "Club regalia"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "B",
+      "tags": [
+        "club",
+        "satellite"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "sun9-concours-prep",
+      "title": "Concours week prep & media days",
+      "date": "2026-08-09",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "allDay": false,
+      "access": "mixed",
+      "venueId": "pebble-beach-lodge",
+      "summary": "Behind-the-scenes energy builds near Pebble Beach as midweek approaches.",
+      "description": "Not a public ticketed show day, but a useful orientation day: learn gate logistics, shop Village if open early, and rest before auction week.",
+      "whatToLookFor": [
+        "Setup activity",
+        "Credential offices",
+        "Quiet Lodge campus"
+      ],
+      "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
+      "ticketUrl": null,
+      "tier": "C",
+      "tags": [
+        "planning"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "sun9-carmel-walk",
+      "title": "Carmel village car spotting",
+      "date": "2026-08-09",
+      "startTime": "10:00",
+      "endTime": "16:00",
+      "allDay": false,
+      "access": "free",
+      "venueId": "carmel-ocean-ave",
+      "summary": "Free walking circuit — Ocean Ave, side streets, and hotel drives.",
+      "description": "Sunday afternoon car culture without a formal ticket. Be a good guest: sidewalks only, no blocking driveways.",
+      "whatToLookFor": [
+        "Garage pulls",
+        "Weekend tourists + trailers",
+        "Boutique parking gems"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "C",
+      "tags": [
+        "free",
+        "carmel"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "mon10-auction-loadin",
+      "title": "Auction house load-in & early previews",
+      "date": "2026-08-10",
+      "startTime": "10:00",
+      "endTime": "18:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "hyatt-regency-monterey",
+      "summary": "Houses begin staging lots; some offer early credentialed viewing.",
+      "description": "Monday is when catalogs become real metal. Preview access varies — some free with registration, some ticketed. Confirm each auctioneer for 2026.",
+      "whatToLookFor": [
+        "Lot tags",
+        "Concours alumni",
+        "Estimate boards"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "A",
+      "tags": [
+        "auction",
+        "ticketed"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "mon10-laguna-practice",
+      "title": "Laguna Seca — Reunion practice (typical)",
+      "date": "2026-08-10",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "laguna-seca",
+      "summary": "Historic race practice days often begin midweek at WeatherTech Raceway.",
+      "description": "Exact 2026 Reunion schedule posts closer to the event. If practice is open to ticket holders, Monday–Tuesday can be less crowded than weekend race days.",
+      "whatToLookFor": [
+        "Open-wheel groups",
+        "Paddock builds",
+        "Quiet corners for photos"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "B",
+      "tags": [
+        "racing",
+        "ticketed"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "tue11-rm-preview",
+      "title": "RM Sotheby’s Monterey — preview (typical)",
+      "date": "2026-08-11",
+      "startTime": "10:00",
+      "endTime": "18:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "monterey-conf-center",
+      "summary": "Flagship catalog preview days for one of Car Week’s major auction houses.",
+      "description": "RM Sotheby’s is a perennial Monterey fixture. Preview hours and sale nights are house-specific — use their 2026 event page for tickets and venue. Listed here as a midweek planning anchor.",
+      "whatToLookFor": [
+        "Blue-chip sports cars",
+        "Pre-war elegance",
+        "Evening sale schedule"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "A",
+      "tags": [
+        "auction",
+        "ticketed"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "tue11-gooding-preview",
+      "title": "Gooding & Company — preview (typical)",
+      "date": "2026-08-11",
+      "startTime": "10:00",
+      "endTime": "18:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "pebble-beach-lodge",
+      "summary": "Pebble Beach–area auction previews often run midweek near the Lodge.",
+      "description": "Gooding traditionally anchors near Pebble Beach. Confirm 2026 pavilion location and sale night. Great complement to downtown previews the same day.",
+      "whatToLookFor": [
+        "Concours-quality lots",
+        "Open-air pavilion light",
+        "Estimate chatter"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "A",
+      "tags": [
+        "auction",
+        "ticketed"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "tue11-broad-arrow",
+      "title": "Broad Arrow / other houses — preview",
+      "date": "2026-08-11",
+      "startTime": "10:00",
+      "endTime": "18:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "hyatt-regency-monterey",
+      "summary": "Additional auction previews fill midweek Monterey.",
+      "description": "Multiple houses compete for attention. Use this slot to compare catalogs and plan which sale nights matter most to you.",
+      "whatToLookFor": [
+        "Modern hypercars",
+        "American classics",
+        "Registration desks"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "B",
+      "tags": [
+        "auction",
+        "ticketed"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "wed12-auction-sales",
+      "title": "Evening auction sales begin",
+      "date": "2026-08-12",
+      "startTime": "17:00",
+      "endTime": "22:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "monterey-conf-center",
+      "summary": "Sale sessions typically light up midweek evenings — check each house.",
+      "description": "Wednesday is often when hammers start falling in earnest. Tickets, paddles, and dress codes vary. If you are not bidding, gallery seating may still require a pass.",
+      "whatToLookFor": [
+        "Opening night lots",
+        "Record watches",
+        "Hospitality tents"
+      ],
+      "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
+      "ticketUrl": null,
+      "tier": "A",
+      "tags": [
+        "auction",
+        "ticketed",
+        "evening"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "wed12-reunion-qual",
+      "title": "Laguna Seca — qualifying / races (typical)",
+      "date": "2026-08-12",
+      "startTime": "08:00",
+      "endTime": "17:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "laguna-seca",
+      "summary": "Midweek track action as Reunion week builds.",
+      "description": "Confirm 2026 Rolex Monterey Motorsports Reunion day schedule. Midweek tickets can be a calmer way to see historic cars on track.",
+      "whatToLookFor": [
+        "Qualifying runs",
+        "Group by era",
+        "Paddock access tiers"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "B",
+      "tags": [
+        "racing",
+        "ticketed"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "thu13-dawn-tour-start",
+      "title": "Tour d’Elegance — early departure viewing",
+      "date": "2026-08-13",
+      "startTime": "06:30",
+      "endTime": "08:30",
+      "allDay": false,
+      "access": "free",
+      "venueId": "pebble-beach-lodge",
+      "summary": "Catch cars leaving the Pebble Beach campus at the start of Tour day.",
+      "description": "If public viewing is available near staging, early morning is magical. Follow marshals; do not enter closed roads. Pair with Carmel or Pacific Grove curb spots later.",
+      "whatToLookFor": [
+        "Cold-start classics",
+        "Period helmets and goggles",
+        "Support convoys"
+      ],
+      "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
+      "ticketUrl": null,
+      "tier": "A",
+      "tags": [
+        "tour",
+        "free"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "thu13-auction-day",
+      "title": "Auction sales continue",
+      "date": "2026-08-13",
+      "startTime": "10:00",
+      "endTime": "21:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "monterey-conf-center",
+      "summary": "Houses often continue previews and sales through Tour Thursday.",
+      "description": "You can combine morning Tour roadside viewing with afternoon auction halls. Travel time between Carmel/Pebble and Monterey matters — plan buffers.",
+      "whatToLookFor": [
+        "Day-sale lots",
+        "Catalog highlights",
+        "Shuttle logistics"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "B",
+      "tags": [
+        "auction",
+        "ticketed"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "fri14-legends",
+      "title": "Legends of the Autobahn (typical timing)",
+      "date": "2026-08-14",
+      "startTime": "09:00",
+      "endTime": "15:00",
+      "allDay": false,
+      "access": "mixed",
+      "venueId": "countywide",
+      "summary": "German marques gathering — confirm 2026 date and site.",
+      "description": "BMW, Mercedes, Audi, Porsche, and friends often host a large midweek/weekend lawn. Access rules vary; check the Legends site for 2026.",
+      "whatToLookFor": [
+        "E30s to AMGs",
+        "Club displays",
+        "European picnic energy"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "A",
+      "tags": [
+        "german",
+        "club"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "fri14-auction-wrap",
+      "title": "Auction week peak sales",
+      "date": "2026-08-14",
+      "startTime": "10:00",
+      "endTime": "21:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "monterey-conf-center",
+      "summary": "Friday often hosts major sale sessions alongside Quail and Concorso.",
+      "description": "If you only attend one auction night, verify which house features the lots you care about on Friday 2026.",
+      "whatToLookFor": [
+        "Headline lots",
+        "Broadcast energy",
+        "Post-sale parking lot chatter"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "A",
+      "tags": [
+        "auction",
+        "ticketed"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "sat15-rfw",
+      "title": "Rolex Monterey Motorsports Reunion — feature Saturday",
+      "date": "2026-08-15",
+      "startTime": "08:00",
+      "endTime": "18:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "laguna-seca",
+      "summary": "Busy track day with strong historic grids (confirm 2026 feature races).",
+      "description": "Saturday at Laguna Seca is a classic Car Week choice if you want racing over lawns. Buy tickets early; arrive before first green flag.",
+      "whatToLookFor": [
+        "Feature grids",
+        "Vintage liveries",
+        "Corkscrew views"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "A",
+      "tags": [
+        "racing",
+        "ticketed",
+        "must-see"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "sat15-concours-field-setup",
+      "title": "Concours field setup (restricted)",
+      "date": "2026-08-15",
+      "startTime": "12:00",
+      "endTime": "20:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "pebble-18",
+      "summary": "Entrants and crews stage for Sunday — limited public access.",
+      "description": "Not a general-admission show day. Included so you understand why Pebble Beach roads feel busy Saturday afternoon. Focus on Lemons, Werks, or Reunion instead unless you have credentials.",
+      "whatToLookFor": [
+        "Transporter traffic",
+        "White-glove crews",
+        "Security perimeters"
+      ],
+      "infoUrl": "https://www.pebblebeachconcours.net/event-calendar/",
+      "ticketUrl": null,
+      "tier": "C",
+      "tags": [
+        "concours",
+        "planning"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "sat15-evening-hospitality",
+      "title": "Private hospitality & brand evenings",
+      "date": "2026-08-15",
+      "startTime": "18:00",
+      "endTime": "22:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "countywide",
+      "summary": "Invitation-only brand and collector dinners peak Saturday night.",
+      "description": "Mostly not open to the public. Listed as context for why hotels and restaurants are fully booked. Enjoy public spots in Monterey and Carmel if you are freelancing.",
+      "whatToLookFor": [
+        "Valet lines of exotics",
+        "Hotel ballrooms",
+        "Quiet back-street parking"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week-events-by-day/",
+      "ticketUrl": null,
+      "tier": "C",
+      "tags": [
+        "evening",
+        "ticketed"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "sun16-dawn-patrol",
+      "title": "Concours Dawn Patrol",
+      "date": "2026-08-16",
+      "startTime": "05:30",
+      "endTime": "08:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "pebble-18",
+      "summary": "Early access for credentialed spectators as cars take the fairway.",
+      "description": "One of the most atmospheric hours of Car Week. Confirm whether your 2026 ticket tier includes Dawn Patrol. Dress for fog and bring layers.",
+      "whatToLookFor": [
+        "Cars rolling onto dew",
+        "Quiet judging starts",
+        "Pacific light"
+      ],
+      "infoUrl": "https://www.pebblebeachconcours.net/event/pebble-beach-concours-delegance/",
+      "ticketUrl": "https://www.theconcoursstore.com/collections/tickets",
+      "tier": "A",
+      "tags": [
+        "concours",
+        "ticketed",
+        "must-see"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "sun16-awards",
+      "title": "Concours awards & Best of Show",
+      "date": "2026-08-16",
+      "startTime": "14:00",
+      "endTime": "17:00",
+      "allDay": false,
+      "access": "ticketed",
+      "venueId": "pebble-18",
+      "summary": "Afternoon awards culminate in Best of Show on the fairway.",
+      "description": "Exact award timing is announced on-site. Stay for the runway if your ticket allows — it is the emotional peak of the week.",
+      "whatToLookFor": [
+        "Class winners",
+        "Best of Show runway",
+        "Champagne spray"
+      ],
+      "infoUrl": "https://www.pebblebeachconcours.net/event/pebble-beach-concours-delegance/",
+      "ticketUrl": "https://www.theconcoursstore.com/collections/tickets",
+      "tier": "A",
+      "tags": [
+        "concours",
+        "ticketed",
+        "must-see"
+      ],
+      "lastVerifiedAt": "2026-08-02"
+    },
+    {
+      "id": "sun16-departure",
+      "title": "Car Week departures & trailer traffic",
+      "date": "2026-08-16",
+      "startTime": "16:00",
+      "endTime": "21:00",
+      "allDay": false,
+      "access": "free",
+      "venueId": "countywide",
+      "summary": "Expect heavy outbound traffic as the week ends.",
+      "description": "Practical planning entry: book late dinners in Monterey, avoid rush-hour gates, and leave extra time for 17-Mile Drive exits.",
+      "whatToLookFor": [
+        "Transporter convoys",
+        "Hotel checkout waves",
+        "Sunset peninsula light"
+      ],
+      "infoUrl": "https://www.seemonterey.com/monterey-car-week/",
+      "ticketUrl": null,
+      "tier": "C",
+      "tags": [
+        "planning"
+      ],
       "lastVerifiedAt": "2026-08-02"
     }
   ],
