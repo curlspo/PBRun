@@ -532,19 +532,24 @@ html[lang="ar"] .card button[type="submit"] {
   display: block;
 }
 
-.success h2 {
-  margin: 0 0 0.5rem;
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-weight: 600;
-  font-size: 1.55rem;
+.success-msg {
+  margin: 0;
   color: var(--ink);
+  font-family: "Cormorant Garamond", Georgia, "Noto Sans JP", "Noto Sans SC", "Noto Sans KR", "Noto Sans Arabic", serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
 }
 
-.success p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.55;
+@media (max-width: 380px) {
+  .success-msg {
+    white-space: normal;
+  }
+}
+
+.success .toggle-wrap {
+  margin-top: 1rem;
 }
 
 .site-footer {
