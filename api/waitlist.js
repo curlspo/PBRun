@@ -85,6 +85,7 @@ function parseRecord(issue) {
     attending: record.attending || "",
     platform: record.platform || "",
     source: record.source || "",
+    language: record.language || "",
     utm_source: record.utm_source || "",
     utm_medium: record.utm_medium || "",
     utm_campaign: record.utm_campaign || "",
