@@ -2,64 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>PBCRun</title>
-  <meta name="robots" content="noindex" />
-  <meta name="theme-color" content="#faf8f4" />
-  <link rel="stylesheet" href="/css/site.css" />
-  <style>
-    .app-shell {
-      flex: 1;
-      width: min(100% - 1.5rem, 28rem);
-      margin: 0 auto;
-      padding: 2.5rem 0 2rem;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="refresh" content="0;url=/guide" />
+  <title>PBCRun — Opening guide…</title>
+  <script>
+    try {
+      if (!localStorage.getItem("pbcrun_access")) {
+        window.location.replace("/?need_code=1");
+      } else {
+        window.location.replace("/guide");
+      }
+    } catch (e) {
+      window.location.replace("/guide");
     }
-    .app-shell h1 {
-      max-width: none;
-      font-size: clamp(1.75rem, 6vw, 2.25rem);
-    }
-    .app-shell p {
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.55;
-      max-width: 28ch;
-    }
-    .app-shell a {
-      color: var(--gold);
-      font-weight: 600;
-      margin-top: 1rem;
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
-    }
-  </style>
+  </script>
 </head>
 <body>
-  <main class="app-shell" id="main">
-    <p class="wordmark">PBCRun</p>
-    <h1 id="title">Welcome</h1>
-    <p id="body">You’re in. The full guide is being prepared for Car Week.</p>
-    <a href="/">← Back</a>
-  </main>
-  <script>
-    (function () {
-      try {
-        var raw = localStorage.getItem("pbcrun_access");
-        if (!raw) {
-          window.location.replace("/?need_code=1");
-          return;
-        }
-        JSON.parse(raw);
-      } catch (e) {
-        window.location.replace("/?need_code=1");
-      }
-    })();
-  </script>
+  <p><a href="/guide">Continue to guide</a></p>
 </body>
 </html>

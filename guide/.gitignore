@@ -1,0 +1,4 @@
+# Keep monorepo root as source of truth; local Expo artifacts
+.expo/
+dist/
+web-build/

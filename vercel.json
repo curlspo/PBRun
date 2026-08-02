@@ -10,5 +10,17 @@
         { "key": "X-Frame-Options", "value": "DENY" }
       ]
     }
+  ],
+  "rewrites": [
+    { "source": "/guide", "destination": "/guide.html" },
+    { "source": "/guide/", "destination": "/guide.html" },
+    { "source": "/guide/_expo/:path*", "destination": "/guide-web/_expo/:path*" },
+    { "source": "/guide/assets/:path*", "destination": "/guide-web/assets/:path*" },
+    { "source": "/guide/calendar", "destination": "/guide-web/calendar" },
+    { "source": "/guide/cars", "destination": "/guide-web/cars" },
+    { "source": "/guide/profile", "destination": "/guide-web/profile" },
+    { "source": "/guide/event/:id", "destination": "/guide-web/event/[id]" },
+    { "source": "/guide/car/:id", "destination": "/guide-web/car/[id]" },
+    { "source": "/guide/:path*", "destination": "/guide-web/:path*" }
   ]
 }

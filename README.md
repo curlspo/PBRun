@@ -1,43 +1,56 @@
 # PBCRun
 
-Unofficial Monterey Car Week companion — **invite-only early access**.
+Unofficial Monterey Car Week companion — **invite gate + guide app**.
 
-## Live now (tonight)
+## What’s live
 
-Static **invitation waitlist** landing page at the site root:
+| Surface | URL / path |
+|---------|------------|
+| Interest / invite landing | https://pbcrun.vercel.app (→ pbcrun.com when DNS is set) |
+| Enter with code | Landing form → `/app` (placeholder) **or** full guide via Expo |
+| Waitlist request | Landing secondary form |
+| Privacy | `/privacy` |
+| Admin waitlist | `/admin` |
 
-- **Request invitation** + email capture
-- Unofficial disclaimer
-- Form submissions → FormSubmit → `jhollidayesq@gmail.com` (change in `index.html` if needed)
+## Guide app (MVP)
 
-### Local preview
+Expo + TypeScript app in **`guide/`**:
+
+- **Home** — up next, featured car, today’s events  
+- **Calendar** — Aug 7–16 day chips, free/ticketed filter  
+- **Cars** — directory seed (programmed shows)  
+- **Profile** — local check-ins + saved events  
+- **Event detail** — save, check-in + private note, directions, official links  
+
+Content: `guide/content/content.json` (curate and expand).
+
+### Run locally
 
 ```bash
-cd ~/PBRun
-npx --yes serve -l 3000
-# open http://localhost:3000
+cd guide
+npm install
+npm run ios    # simulator
+npm run web    # browser
 ```
 
-### Deploy (Vercel)
+### iOS TestFlight (next)
 
 ```bash
-cd ~/PBRun
-vercel --prod
+cd guide
+npx eas-cli login
+npx eas build --platform ios --profile preview
 ```
 
-Point **pbcrun.com** / **www.pbcrun.com** DNS to the Vercel project (Domains in the Vercel dashboard).  
-Until apex works, share the `*.vercel.app` URL or `www` once DNS is attached.
+Bundle ID: `com.pbcrun.app`
 
-### First email test
+## Invitation codes
 
-FormSubmit sends a **one-time confirmation** to the inbox in the form `action` URL. Confirm that email before relying on production submissions.
+Vercel env `INVITE_CODES` (comma-separated). Redeploy after changes.
 
-## Product docs
+## DNS
 
-- `docs/DESIGN.md` — technical design (pre-app)
-- `docs/BRIEF_RECONCILIATION.md` — Claude brief vs corrected MVP cut
-- `docs/pbcrun-app-plan-mvp.pdf` — Claude product plan PDF
+Point **pbcrun.com** at Vercel (see `docs/DNS_AND_WAITLIST.md`).
 
-## Stack (app — next)
+## Disclaimer
 
-Expo (iOS + web) after waitlist is live. Android deferred. No photos in MVP.
+PBCRun is an unofficial guide not affiliated with the Pebble Beach Concours d’Elegance.

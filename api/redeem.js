@@ -215,6 +215,6 @@ module.exports = async function handler(req, res) {
     ok: true,
     message: "Welcome",
     token,
-    redirect: "/app",
+    redirect: "/guide",
   });
 };
