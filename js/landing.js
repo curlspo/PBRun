@@ -25,10 +25,10 @@
       document.title = I.t(currentLang, "title");
       if (consentPrivacy) {
         consentPrivacy.textContent = I.t(currentLang, "consent_link");
-        consentPrivacy.href = "/privacy.html?lang=" + encodeURIComponent(currentLang);
+        consentPrivacy.href = "/privacy?lang=" + encodeURIComponent(currentLang);
       }
       if (footerPrivacy) {
-        footerPrivacy.href = "/privacy.html?lang=" + encodeURIComponent(currentLang);
+        footerPrivacy.href = "/privacy?lang=" + encodeURIComponent(currentLang);
       }
       // Rebuild consent label: body text + link
       var consentLabel = document.querySelector('label[for="consent"]');
