@@ -8,6 +8,7 @@ import "react-native-reanimated";
 
 import { AccessGate } from "@/components/AccessGate";
 import { colors } from "@/constants/Theme";
+import { PlanProvider } from "@/src/state/PlanContext";
 
 export { ErrorBoundary } from "expo-router";
 
@@ -34,20 +35,22 @@ export default function RootLayout() {
   if (!loaded) return null;
 
   return (
-    <AccessGate>
-      <StatusBar style="dark" />
-      <Stack
-        screenOptions={{
-          headerStyle: { backgroundColor: colors.bg },
-          headerTintColor: colors.gold,
-          headerTitleStyle: { color: colors.ink, fontWeight: "600" },
-          contentStyle: { backgroundColor: colors.bg },
-        }}
-      >
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="event/[id]" options={{ title: "Event" }} />
-        <Stack.Screen name="car/[id]" options={{ title: "Car" }} />
-      </Stack>
-    </AccessGate>
+    <PlanProvider>
+      <AccessGate>
+        <StatusBar style="dark" />
+        <Stack
+          screenOptions={{
+            headerStyle: { backgroundColor: colors.bg },
+            headerTintColor: colors.gold,
+            headerTitleStyle: { color: colors.ink, fontWeight: "600" },
+            contentStyle: { backgroundColor: colors.bg },
+          }}
+        >
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="event/[id]" options={{ title: "Event" }} />
+          <Stack.Screen name="car/[id]" options={{ title: "Car" }} />
+        </Stack>
+      </AccessGate>
+    </PlanProvider>
   );
 }

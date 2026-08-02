@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useCallback, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 const SAVED_KEY = "pbcrun_saved_events";
 const CHECKINS_KEY = "pbcrun_checkins";
@@ -9,6 +9,21 @@ export type CheckIn = {
   at: string;
   note?: string;
 };
+
+type PlanContextValue = {
+  ready: boolean;
+  saved: string[];
+  checkIns: CheckIn[];
+  toggleSaved: (eventId: string) => Promise<void>;
+  isSaved: (eventId: string) => boolean;
+  checkIn: (eventId: string, note?: string) => Promise<void>;
+  removeCheckIn: (eventId: string) => Promise<void>;
+  isCheckedIn: (eventId: string) => boolean;
+  getCheckIn: (eventId: string) => CheckIn | undefined;
+  clearAll: () => Promise<void>;
+};
+
+const PlanContext = createContext<PlanContextValue | null>(null);
 
 async function readJson<T>(key: string, fallback: T): Promise<T> {
   try {
@@ -20,7 +35,7 @@ async function readJson<T>(key: string, fallback: T): Promise<T> {
   }
 }
 
-export function usePlan() {
+export function PlanProvider({ children }: { children: React.ReactNode }) {
   const [saved, setSaved] = useState<string[]>([]);
   const [checkIns, setCheckIns] = useState<CheckIn[]>([]);
   const [ready, setReady] = useState(false);
@@ -71,6 +86,13 @@ export function usePlan() {
     [checkIns, persistCheckIns]
   );
 
+  const removeCheckIn = useCallback(
+    async (eventId: string) => {
+      await persistCheckIns(checkIns.filter((c) => c.eventId !== eventId));
+    },
+    [checkIns, persistCheckIns]
+  );
+
   const isCheckedIn = useCallback(
     (eventId: string) => checkIns.some((c) => c.eventId === eventId),
     [checkIns]
@@ -81,14 +103,45 @@ export function usePlan() {
     [checkIns]
   );
 
-  return {
-    ready,
-    saved,
-    checkIns,
-    toggleSaved,
-    isSaved,
-    checkIn,
-    isCheckedIn,
-    getCheckIn,
-  };
+  const clearAll = useCallback(async () => {
+    await persistSaved([]);
+    await persistCheckIns([]);
+  }, [persistSaved, persistCheckIns]);
+
+  const value = useMemo(
+    () => ({
+      ready,
+      saved,
+      checkIns,
+      toggleSaved,
+      isSaved,
+      checkIn,
+      removeCheckIn,
+      isCheckedIn,
+      getCheckIn,
+      clearAll,
+    }),
+    [
+      ready,
+      saved,
+      checkIns,
+      toggleSaved,
+      isSaved,
+      checkIn,
+      removeCheckIn,
+      isCheckedIn,
+      getCheckIn,
+      clearAll,
+    ]
+  );
+
+  return <PlanContext.Provider value={value}>{children}</PlanContext.Provider>;
+}
+
+export function usePlan() {
+  const ctx = useContext(PlanContext);
+  if (!ctx) {
+    throw new Error("usePlan must be used within PlanProvider");
+  }
+  return ctx;
 }

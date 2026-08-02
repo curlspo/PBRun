@@ -12,14 +12,17 @@ import {
 
 import { colors, spacing } from "@/constants/Theme";
 import { accessLabel, formatDayLabel, getEvent, getVenue, mapsUrl } from "@/src/content/load";
-import { usePlan } from "@/src/state/plan";
+import { usePlan } from "@/src/state/PlanContext";
+import { addEventToCalendar, shareEvent } from "@/src/utils/calendar";
 
 export default function EventDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const event = getEvent(String(id));
   const venue = getVenue(event?.venueId);
-  const { isSaved, toggleSaved, isCheckedIn, checkIn, getCheckIn, ready } = usePlan();
+  const { isSaved, toggleSaved, isCheckedIn, checkIn, removeCheckIn, getCheckIn, ready } =
+    usePlan();
   const [note, setNote] = useState("");
+  const [busy, setBusy] = useState(false);
 
   if (!event) {
     return (
@@ -39,12 +42,16 @@ export default function EventDetailScreen() {
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: event.title }} />
-      <Text style={[styles.badge, { color: badgeColor, borderColor: badgeColor }]}>
-        {accessLabel(event.access)}
-      </Text>
+      <View style={styles.badgeRow}>
+        <Text style={[styles.badge, { color: badgeColor, borderColor: badgeColor }]}>
+          {accessLabel(event.access)}
+        </Text>
+        {event.tags?.includes("must-see") ? <Text style={styles.must}>MUST-SEE</Text> : null}
+      </View>
       <Text style={styles.title}>{event.title}</Text>
       <Text style={styles.meta}>
-        {formatDayLabel(event.date)} · {event.allDay ? "All day" : `${event.startTime}–${event.endTime}`} PT
+        {formatDayLabel(event.date)} ·{" "}
+        {event.allDay ? "All day" : `${event.startTime}–${event.endTime}`} PT
       </Text>
       {venue ? (
         <Text style={styles.venue}>
@@ -72,8 +79,35 @@ export default function EventDetailScreen() {
           disabled={!ready}
         >
           <Text style={[styles.btnText, saved && styles.btnTextActive]}>
-            {saved ? "Saved" : "Save"}
+            {saved ? "In my plan" : "Save to plan"}
           </Text>
+        </Pressable>
+        <Pressable
+          style={styles.btn}
+          disabled={busy}
+          onPress={async () => {
+            setBusy(true);
+            try {
+              await addEventToCalendar(event);
+            } finally {
+              setBusy(false);
+            }
+          }}
+        >
+          <Text style={styles.btnText}>Add to calendar</Text>
+        </Pressable>
+        <Pressable
+          style={styles.btn}
+          onPress={async () => {
+            setBusy(true);
+            try {
+              await shareEvent(event);
+            } finally {
+              setBusy(false);
+            }
+          }}
+        >
+          <Text style={styles.btnText}>Share</Text>
         </Pressable>
         {venue ? (
           <Pressable style={styles.btn} onPress={() => Linking.openURL(mapsUrl(venue))}>
@@ -95,10 +129,19 @@ export default function EventDetailScreen() {
       <View style={styles.block}>
         <Text style={styles.blockTitle}>Check in</Text>
         {checked ? (
-          <Text style={styles.body}>
-            Checked in {existing?.at ? new Date(existing.at).toLocaleString() : ""}.
-            {existing?.note ? ` Note: “${existing.note}”` : ""}
-          </Text>
+          <>
+            <Text style={styles.body}>
+              Checked in {existing?.at ? new Date(existing.at).toLocaleString() : ""}.
+              {existing?.note ? ` Note: “${existing.note}”` : ""}
+            </Text>
+            <Pressable
+              style={[styles.btn, { marginTop: 10 }]}
+              onPress={() => removeCheckIn(event.id)}
+              disabled={!ready}
+            >
+              <Text style={styles.btnText}>Remove check-in</Text>
+            </Pressable>
+          </>
         ) : (
           <>
             <TextInput
@@ -129,6 +172,7 @@ const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.bg },
   content: { padding: spacing.md, paddingBottom: spacing.xl },
   missing: { padding: spacing.md, color: colors.muted },
+  badgeRow: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 8 },
   badge: {
     alignSelf: "flex-start",
     fontSize: 11,
@@ -138,8 +182,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingHorizontal: 8,
     paddingVertical: 3,
-    marginBottom: 8,
   },
+  must: { fontSize: 11, fontWeight: "800", color: colors.gold, letterSpacing: 0.5 },
   title: { fontSize: 26, fontWeight: "700", color: colors.ink },
   meta: { fontSize: 14, color: colors.muted, marginTop: 6, fontWeight: "600" },
   venue: { fontSize: 14, color: colors.gold, marginTop: 4, fontWeight: "600" },

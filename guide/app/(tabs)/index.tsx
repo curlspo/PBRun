@@ -3,7 +3,15 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { EventCard } from "@/components/EventCard";
 import { colors, spacing } from "@/constants/Theme";
-import { eventsForToday, featuredCars, formatDayLabel, getContent, nextEvent } from "@/src/content/load";
+import {
+  eventsForToday,
+  featuredCars,
+  formatDayLabel,
+  getContent,
+  getEvent,
+  nextEvent,
+} from "@/src/content/load";
+import { usePlan } from "@/src/state/PlanContext";
 
 export default function HomeScreen() {
   const content = getContent();
@@ -11,6 +19,15 @@ export default function HomeScreen() {
   const next = nextEvent();
   const featured = featuredCars()[0];
   const dayLabel = todayEvents[0] ? formatDayLabel(todayEvents[0].date) : "Car Week 2026";
+  const { saved, ready } = usePlan();
+
+  const planEvents = saved
+    .map((id) => getEvent(id))
+    .filter(Boolean)
+    .sort((a, b) => a!.date.localeCompare(b!.date) || a!.startTime.localeCompare(b!.startTime))
+    .slice(0, 6);
+
+  const mustSeeToday = todayEvents.filter((e) => e.tags?.includes("must-see"));
 
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
@@ -30,6 +47,17 @@ export default function HomeScreen() {
         </View>
       ) : null}
 
+      {ready && planEvents.length > 0 ? (
+        <View style={styles.sectionBlock}>
+          <Text style={styles.section}>My plan</Text>
+          <Text style={styles.sectionSub}>{saved.length} saved · tap ★ on any event</Text>
+          {planEvents.map((e) => (e ? <EventCard key={e.id} event={e} compact /> : null))}
+          <Link href="/calendar" style={styles.link}>
+            Open calendar →
+          </Link>
+        </View>
+      ) : null}
+
       {featured ? (
         <View style={styles.panel}>
           <Text style={styles.panelLabel}>Featured car</Text>
@@ -43,13 +71,25 @@ export default function HomeScreen() {
         </View>
       ) : null}
 
+      {mustSeeToday.length > 0 ? (
+        <View style={styles.sectionBlock}>
+          <Text style={styles.section}>Must-see today</Text>
+          <Text style={styles.sectionSub}>{formatDayLabel(mustSeeToday[0].date)}</Text>
+          {mustSeeToday.map((e) => (
+            <EventCard key={e.id} event={e} compact />
+          ))}
+        </View>
+      ) : null}
+
       <Text style={styles.section}>{dayLabel}</Text>
-      <Text style={styles.sectionSub}>{todayEvents.length} events · content {content.contentVersion}</Text>
+      <Text style={styles.sectionSub}>
+        {todayEvents.length} events · content {content.contentVersion}
+      </Text>
       {todayEvents.map((e) => (
         <EventCard key={e.id} event={e} />
       ))}
       {!todayEvents.length ? (
-        <Text style={styles.empty}>No events loaded for this day. Check Calendar for the full week.</Text>
+        <Text style={styles.empty}>No events for this day. Check Calendar for the full week.</Text>
       ) : null}
     </ScrollView>
   );
@@ -91,6 +131,7 @@ const styles = StyleSheet.create({
   panelTitle: { fontSize: 18, fontWeight: "600", color: colors.ink },
   panelMeta: { fontSize: 13, color: colors.muted, marginTop: 4 },
   link: { marginTop: 10, color: colors.gold, fontWeight: "700", fontSize: 14 },
+  sectionBlock: { marginBottom: spacing.sm },
   section: { fontSize: 18, fontWeight: "700", color: colors.ink, marginTop: spacing.md },
   sectionSub: { fontSize: 12, color: colors.muted, marginBottom: spacing.sm },
   empty: { color: colors.muted, fontSize: 14, marginTop: spacing.sm },
