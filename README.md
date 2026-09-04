@@ -6,11 +6,13 @@ Unofficial Monterey Car Week companion — **invite gate + guide app**.
 
 | Surface | URL / path |
 |---------|------------|
-| Interest / invite landing | https://pbcrun.vercel.app (→ pbcrun.com when DNS is set) |
+| Production domain | https://pbcrun.com (must be this repo — see remap in `docs/DNS_AND_WAITLIST.md`) |
 | Enter with code | Landing form → `/app` (placeholder) **or** full guide via Expo |
 | Waitlist request | Landing secondary form |
 | Privacy | `/privacy` |
 | Admin waitlist | `/admin` |
+
+`<title>` / `og:title`: **PBC Run — Concours companion**.
 
 ## Guide app (MVP)
 
@@ -47,9 +49,10 @@ Bundle ID: `com.pbcrun.app`
 
 Vercel env `INVITE_CODES` (comma-separated). Redeploy after changes.
 
-## DNS
+## Deploy / DNS
 
-Point **pbcrun.com** at Vercel (see `docs/DNS_AND_WAITLIST.md`).
+Static HTML + `api/` + `middleware.js` via Vercel (`vercel.json`). Production branch is `main`.  
+**pbcrun.com** DNS is already on Vercel; if the live title is not **PBC Run — Concours companion**, the domain is still attached to the Next waitlist project — remap in `docs/DNS_AND_WAITLIST.md`.
 
 ## Disclaimer
 

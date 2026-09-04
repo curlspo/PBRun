@@ -4,6 +4,7 @@
  */
 
 export const config = {
+  runtime: "nodejs",
   matcher: [
     "/guide",
     "/guide/(.*)",
