@@ -28,7 +28,7 @@ window.PBCRUN_I18N = (function () {
       {
         skip: "Skip to main content",
         lang_label: "Language",
-        title: "PBCRun — Request an Invitation",
+        title: "PBC Run — Concours companion",
         wordmark_aria: "PBCRun home",
         eyebrow: "Car Week 2026",
         headline_line1: "The Independent Guide",
@@ -143,7 +143,7 @@ window.PBCRUN_I18N = (function () {
       {
         skip: "Vai al contenuto principale",
         lang_label: "Lingua",
-        title: "PBCRun — Richiedi un invito",
+        title: "PBC Run — Compagno del Concours",
         eyebrow: "Car Week 2026",
         headline_line1: "La guida indipendente",
         headline_to: "alla",
@@ -243,7 +243,7 @@ window.PBCRUN_I18N = (function () {
     {
       skip: "Zum Hauptinhalt springen",
       lang_label: "Sprache",
-      title: "PBCRun — Einladung anfordern",
+      title: "PBC Run — Concours-Begleiter",
       eyebrow: "Car Week 2026",
       headline_line1: "Der unabhängige Guide",
       headline_to: "zur",
@@ -333,7 +333,7 @@ window.PBCRUN_I18N = (function () {
     {
       skip: "Aller au contenu principal",
       lang_label: "Langue",
-      title: "PBCRun — Demander une invitation",
+      title: "PBC Run — Compagnon du Concours",
       eyebrow: "Car Week 2026",
       headline_line1: "Le guide indépendant",
       headline_to: "de la",
@@ -421,7 +421,7 @@ window.PBCRUN_I18N = (function () {
     {
       skip: "Saltar al contenido principal",
       lang_label: "Idioma",
-      title: "PBCRun — Solicitar invitación",
+      title: "PBC Run — Compañero del Concours",
       eyebrow: "Car Week 2026",
       headline_line1: "La guía independiente",
       headline_to: "de la",
@@ -509,7 +509,7 @@ window.PBCRUN_I18N = (function () {
     {
       skip: "Перейти к основному содержимому",
       lang_label: "Язык",
-      title: "PBCRun — Запросить приглашение",
+      title: "PBC Run — спутник Concours",
       eyebrow: "Car Week 2026",
       headline_line1: "Независимый гид",
       headline_to: "по",
@@ -597,7 +597,7 @@ window.PBCRUN_I18N = (function () {
     {
       skip: "تخطّ إلى المحتوى الرئيسي",
       lang_label: "اللغة",
-      title: "PBCRun — اطلب دعوة",
+      title: "PBC Run — رفيق Concours",
       eyebrow: "أسبوع السيارات 2026",
       headline_line1: "الدليل المستقل",
       headline_to: "لـ",
@@ -685,7 +685,7 @@ window.PBCRUN_I18N = (function () {
     {
       skip: "メインコンテンツへスキップ",
       lang_label: "言語",
-      title: "PBCRun — 招待をリクエスト",
+      title: "PBC Run — Concoursコンパニオン",
       eyebrow: "カーウィーク 2026",
       headline_line1: "インディペンデント・ガイド",
       headline_to: "—",
@@ -773,7 +773,7 @@ window.PBCRUN_I18N = (function () {
     {
       skip: "본문으로 건너뛰기",
       lang_label: "언어",
-      title: "PBCRun — 초대 요청",
+      title: "PBC Run — Concours 컴패니언",
       eyebrow: "카 위크 2026",
       headline_line1: "독립 가이드",
       headline_to: "—",
@@ -861,7 +861,7 @@ window.PBCRUN_I18N = (function () {
     {
       skip: "跳到主要内容",
       lang_label: "语言",
-      title: "PBCRun — 申请邀请",
+      title: "PBC Run — Concours 伴侣",
       eyebrow: "汽车周 2026",
       headline_line1: "独立指南",
       headline_to: "—",
